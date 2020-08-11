@@ -37,7 +37,7 @@
                     }
                 },
                 {
-                    "id": "optifine:optifine-of:2.1",
+                    "id": "optifine:launchwrapper-of:2.1",
                     "name": "Launchwrapper",
                     "type": "Library",
                     "artifact": {
