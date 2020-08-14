@@ -18,6 +18,8 @@
             "version": "1.0",
             "address": "mc-nexus.de",
             "minecraftVersion": "1.15.2",
+            "optifineVersion": "1.15.2_HD_U_G1_pre30",
+            "launchWrapperVersion": "2.1",
             "discord": {
                 "shortId": "1.12.2 Production Server",
                 "largeImageText": "WesterosCraft 1.12.2 Production Server",
