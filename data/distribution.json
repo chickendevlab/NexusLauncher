@@ -9,6 +9,8 @@
         "oracle": "http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html"
     },
     "rss": "https://forum.mc-nexus.de/index.php?board-feed/",
+    "optifineVersion": "1.15.2_HD_U_G1_pre30",
+    "launchWrapperVersion": "2.1",
     "servers": [
         {
             "id": "MC-Nexus",
