@@ -27,6 +27,7 @@
             "autoconnect": true,
             "optifineVersion": "1.15.2_HD_U_G1_pre30",
             "launchWrapperVersion": "2.1",
+
             "modules": [
                 {
                     "id": "optifine:Optifine:1.15.2_HD_U_G1_pre30",
@@ -60,7 +61,7 @@
                 },
                 {
                     "id": "de.mcnexus:NexusPack:1.1",
-                    "name": "MC-Nexus.de - Resourcepack",
+
                     "type": "File",
                     "artifact": {
                         "size": 34557884,
