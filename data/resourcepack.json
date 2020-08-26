@@ -1,12 +1,13 @@
 {
     "resourcepack": {
-        "id": "optifine:Optifine:1.15.2_HD_U_G1_pre30",
-        "name": "Optifine",
-        "type": "Library",
+        "id": "de.mcnexus:NexusPack:1.1",
+        "name": "MC-Nexus.de - Resourcepack",
+        "type": "File",
         "artifact": {
-            "size": 5042818,
-            "MD5": "28010dd97334d44ac949028f80f6c9aa",
-            "url": "https://ChickenDevLab.github.io/NexusLauncher/data/libs/optifine/Optifine/1.15.2_HD_U_G1_pre30/optifine.jar"
+            "size": 34557884,
+            "MD5": "15ad7a66f0c491822f055e7c7f50ff5b",
+            "path": "resourcepacks/NexusPack.zip",
+            "url": "https://ChickenDevLab.github.io/NexusLauncher/data/resourcepacks/NexusPack/v1.1/v1.1.zip"
         }
     }
 }
