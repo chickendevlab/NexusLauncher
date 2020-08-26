@@ -1,13 +1,13 @@
 {
-  "name": "helioslauncher",
+  "name": "nexuslauncher",
   "version": "1.8.0",
   "productName": "Nexus Launcher",
   "description": "Modded Minecraft Launcher",
   "author": "Leon_Delacroixe",
   "license": "UNLICENSED",
-  "homepage": "https://github.com/dscalzi/HeliosLauncher",
+  "homepage": "https://github.com/ChickenDevLab/NexusLauncher",
   "bugs": {
-    "url": "https://github.com/dscalzi/HeliosLauncher/issues"
+    "url": "https://github.com/ChickenDevLab/NexusLauncher/issues"
   },
   "private": true,
   "main": "index.js",
@@ -47,6 +47,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dscalzi/HeliosLauncher.git"
+    "url": "git+https://github.com/ChickenDevLab/NexusLauncher.git"
   }
 }

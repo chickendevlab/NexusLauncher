@@ -1,0 +1,12 @@
+{
+    "resourcepack": {
+        "id": "optifine:Optifine:1.15.2_HD_U_G1_pre30",
+        "name": "Optifine",
+        "type": "Library",
+        "artifact": {
+            "size": 5042818,
+            "MD5": "28010dd97334d44ac949028f80f6c9aa",
+            "url": "https://ChickenDevLab.github.io/NexusLauncher/data/libs/optifine/Optifine/1.15.2_HD_U_G1_pre30/optifine.jar"
+        }
+    }
+}
