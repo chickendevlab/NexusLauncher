@@ -417,7 +417,7 @@ class Server {
     /**
      * @returns {Array.<Module>} An array of modules for this server.
      */
-    async getModules() {
+    getModules() {
         //let modules = this.modules
         //let response = await fetch('https://ChickenDevLab.github.io/NexusLauncher/data/resourcepack.json')
         request('http://www.google.com', function (error, response, body) {
