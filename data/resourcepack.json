@@ -1,13 +1,7 @@
 {
-    "resourcepack": {
-        "id": "de.mcnexus:NexusPack:1.1",
-        "name": "MC-Nexus.de - Resourcepack",
-        "type": "File",
-        "artifact": {
-            "size": 34557884,
-            "MD5": "15ad7a66f0c491822f055e7c7f50ff5b",
-            "path": "resourcepacks/NexusPack.zip",
-            "url": "https://ChickenDevLab.github.io/NexusLauncher/data/resourcepacks/NexusPack/v1.1/v1.1.zip"
-        }
-    }
+    "id": "de.mcnexus:NexusPack:1.1",
+    "md5": "15ad7a66f0c491822f055e7c7f50ff5b",
+    "size": 34557884,
+    "url": "https://ChickenDevLab.github.io/NexusLauncher/data/resourcepacks/NexusPack/v1.1/v1.1.zip",
+    "path": "resourcepacks/NexusPack.zip",
 }

@@ -15,6 +15,7 @@ const zlib          = require('zlib')
 const ConfigManager = require('./configmanager')
 const DistroManager = require('./distromanager')
 const isDev         = require('./isdev')
+const { resolve } = require('path')
 
 // Constants
 // const PLATFORM_MAP = {
@@ -1375,12 +1376,34 @@ class AssetGuard extends EventEmitter {
      * @param {Object} versionData The version data for the assets.
      * @returns {Promise.<void>} An empty promise to indicate the async processing has completed.
      */
-    validateMiscellaneous(versionData){
+    validateMiscellaneous(versionData, server){
         const self = this
         return new Promise(async (resolve, reject) => {
             await self.validateClient(versionData)
             await self.validateLogConfig(versionData)
+            await self.fetchResourcePack(server)
             resolve()
+        })
+    }
+
+    fetchResourcePack(server){
+        const self = this
+        return new Promise((resolve, reject) => {
+            request(server.getResourcePackInfoFile(), function (error, response, body) {
+                const json = JSON.parse(body)
+                if (!error) {
+                    let asset = new Asset(json.id, json.md5, json.size, json.url, json.path)
+                    if(!AssetGuard._validateLocal(asset.to, 'md5', asset.hash)){
+                        self.files.dlqueue.push(asset)
+                        self.files.dlsize += asset.size*1
+                        resolve()
+                    } else {
+                        resolve()
+                    }
+                }
+                //console.warn(json.id, json.name, json.type, json.required, json.artifact, json.subModules, id)
+                resolve()
+            })
         })
     }
 
@@ -1879,7 +1902,7 @@ class AssetGuard extends EventEmitter {
             this.emit('validate', 'assets')
             await this.validateLibraries(versionData)
             this.emit('validate', 'libraries')
-            await this.validateMiscellaneous(versionData)
+            await this.validateMiscellaneous(versionData, server)
             this.emit('validate', 'files')
             await this.processDlQueues()
             //this.emit('complete', 'download')

@@ -421,28 +421,8 @@ class Server {
     getResourcePackInfoFile() {
         return this.resourcepack
     }
-    
-    getModules() {
 
-        //let modules = this.modules
-        //let response = await fetch('https://ChickenDevLab.github.io/NexusLauncher/data/resourcepack.json')
-        request(this.getResourcePackInfoFile(), function (error, response, body) {
-            if (error) {
-                console.log('Error')
-                return this.modules
-            }
-            let mdls = [JSON.parse(body).resourcepack]
-            console.log('Content')
-            console.log(mdls)
-            console.log('Modules')
-            console.log(this.modules)
-            console.log('Erreicht!!')
-            console.log('Concattet:')
-            console.log(mdls.concat(this.modules))
-            return mdls.concat(this.modules)
-        })
-        //let data = response.json()
-        //modules.push(data.resourcepack)
+    getModules() {
         return this.modules
     }
 
