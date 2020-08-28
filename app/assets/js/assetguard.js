@@ -1392,7 +1392,7 @@ class AssetGuard extends EventEmitter {
             request(server.getResourcePackInfoFile(), function (error, response, body) {
                 const json = JSON.parse(body)
                 if (!error) {
-                    let asset = new Asset(json.id, json.md5, json.size, json.url, json.path)
+                    let asset = new Asset(json.id, json.md5, json.size, json.url, path.join(ConfigManager.getInstanceDirectory(), server.getID(), json.path))
                     if(!AssetGuard._validateLocal(asset.to, 'md5', asset.hash)){
                         self.files.dlqueue.push(asset)
                         self.files.dlsize += asset.size*1
@@ -1401,7 +1401,7 @@ class AssetGuard extends EventEmitter {
                         resolve()
                     }
                 }
-                //console.warn(json.id, json.name, json.type, json.required, json.artifact, json.subModules, id)
+                console.log('Could not fetch resourcepack ('+ server.getResourcePackInfoFile() + ')')
                 resolve()
             })
         })

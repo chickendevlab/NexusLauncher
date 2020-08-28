@@ -1,0 +1,50 @@
+{
+    "_comment": "translatet",
+    "html": {
+        "avatarOverlay": "Bearbeiten"
+    },
+    "js": {
+        "login": {
+            "error": {
+                "invalidValue": "* Ung&uuml;ltige Angabe",
+                "requiredValue": "* Pflicht",
+                "userMigrated": {
+                    "title": "Fehler beim Anmelden:<br>Ung&uuml;ltige Angaben",
+                    "desc": "DU hast versucht, dich mit einem migrierten Account anzumelden. Versuche es erneut mit der Email des Benutzerkontos als Benutzername."
+                },
+                "invalidCredentials": {
+                    "title": "Fehler beim Anmelden:<br>Ung&uuml;ltige Angaben",
+                    "desc": "Die angegebenen Benutzerdaten sind falsch. Bitte versuche es erneut."
+                },
+                "rateLimit": {
+                    "title": "Fehler beim Anmelden:<br>Zu viele Anfragen",
+                    "desc": "Es gibt zur Zeit zu viele Anfragen, sich mit diesem Account anzumelden. Versuche es sp&auml;ter nochmal."
+                },
+                "noInternet": {
+                    "title": "Fehler beim Anmelden:<br>Keine Internetverbindung",
+                    "desc": "Du brauchst eine Internetverbindung um dich bei Mojang anzumelden. Bitte stelle diese sicher und versuche es erneut."
+                },
+                "authDown": {
+                    "title": "Fehler beim Anmelden:<br>Die Anmeldeserver von Mojang sind Offline",
+                    "desc": "Mojangs Anmeldeserver sind zur Zeit offline oder nicht erreichbar. Bitte warte ein bisschen und versuche es dann erneut. Du kannst den Status der Server <a href=\"https://help.mojang.com/\">HIER</a>. &uuml;berpr&uuml;fen."
+                },
+                "notPaid": {
+                    "title": "Fehler beim Anmelden:<br>Minecraft wurde nicht gekauft",
+                    "desc": "Mit dem Account, mit dem du dich anmelden willst, wurde noch kein Minecraft (Java-Edition) gekauft.<br>Du musst dir <a href=\"https://minecraft.net/\">HIER</a> eine Version kaufen."
+                },
+                "unknown": {
+                    "title": "Fehler beim Anmelden:<br>Unbekannter Fehler"
+                }
+            },
+            "login": "LOGIN",
+            "loggingIn": "EINLOGGEN",
+            "success": "ERFOLGREICH",
+            "tryAgain": "Nochmal"
+        },
+        "landing": {
+            "launch": {
+                "pleaseWait": "Bitte warten.."
+            }
+        }
+    }
+}

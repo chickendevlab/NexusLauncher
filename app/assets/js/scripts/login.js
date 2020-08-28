@@ -1,3 +1,5 @@
+//Translatet
+
 /**
  * Script for login.ejs
  */

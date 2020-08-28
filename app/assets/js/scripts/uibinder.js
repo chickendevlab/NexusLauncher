@@ -1,3 +1,5 @@
+// Translatet
+
 /**
  * Initialize UI functions which depend on internal modules.
  * Loaded after core UI functions are initialized in uicore.js.
@@ -109,9 +111,9 @@ function showFatalStartupError(){
         $('#loadingContainer').fadeOut(250, () => {
             document.getElementById('overlayContainer').style.background = 'none'
             setOverlayContent(
-                'Fatal Error: Unable to Load Distribution Index',
-                'A connection could not be established to our servers to download the distribution index. No local copies were available to load. <br><br>The distribution index is an essential file which provides the latest server information. The launcher is unable to start without it. Ensure you are connected to the internet and relaunch the application.',
-                'Close'
+                'Fataler Fehler: Launcher-Infos konnten nicht geladen werden',
+                'Die zum Herunterladen der Browser-Infos ben&ouml;tigte Internetverbindung konnte nicht aufgebaut werden und es konnte keine lokale Version gefunden werden. <br><br> Die ben&ouml;tiget Datei (der Distributionsindex) enth&auml;lt (fast) alle wichtigen Informationen. Der Launcher kann ohne diesem Index nicht starten. Stelle sicher, dass du mit dem Internet verbunden bist und starte den Launcher nochmal neu.',
+                'Schließen'
             )
             setOverlayHandler(() => {
                 const window = remote.getCurrentWindow()
@@ -323,10 +325,10 @@ async function validateSelectedAccount(){
             ConfigManager.save()
             const accLen = Object.keys(ConfigManager.getAuthAccounts()).length
             setOverlayContent(
-                'Failed to Refresh Login',
-                `We were unable to refresh the login for <strong>${selectedAcc.displayName}</strong>. Please ${accLen > 0 ? 'select another account or ' : ''} login again.`,
-                'Login',
-                'Select Another Account'
+                'Erneutes Einloggen fehlgeschlagen',
+                `Der erneute Verifizieren von <strong>${selectedAcc.displayName}</strong> ist fehlgegeschlagen. Bitte ${accLen > 0 ? 'w&auml;hle einen anderen Account oder ' : ''} melde dich erneut an.`,
+                'Anmelden',
+                'Anderen Account w&auml;hlen'
             )
             setOverlayHandler(() => {
                 document.getElementById('loginUsername').value = selectedAcc.username

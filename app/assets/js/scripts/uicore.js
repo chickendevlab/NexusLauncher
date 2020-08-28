@@ -1,3 +1,5 @@
+// Translatet
+
 /**
  * Core UI functions are initialized in this file. This prevents
  * unexpected errors from breaking the core features. Specifically,
@@ -27,8 +29,8 @@ window.eval = global.eval = function () {
 // Display warning when devtools window is opened.
 remote.getCurrentWebContents().on('devtools-opened', () => {
     console.log('%cThe console is dark and full of terrors.', 'color: white; -webkit-text-stroke: 4px #a02d2a; font-size: 60px; font-weight: bold')
-    console.log('%cIf you\'ve been told to paste something here, you\'re being scammed.', 'font-size: 16px')
-    console.log('%cUnless you know exactly what you\'re doing, close this window.', 'font-size: 16px')
+    console.log('%cSchreibe hier nur etwas rein, wenn du GENAU weißt, was du tust!', 'font-size: 16px')
+    console.log('%cHiermit kannst du eine Menge Schaden anrichten!.', 'font-size: 16px')
 })
 
 // Disable zoom, needed for darwin.
@@ -42,13 +44,13 @@ if(!isDev){
         switch(arg){
             case 'checking-for-update':
                 loggerAutoUpdater.log('Checking for update..')
-                settingsUpdateButtonStatus('Checking for Updates..', true)
+                settingsUpdateButtonStatus('Suche nach Updates..', true)
                 break
             case 'update-available':
                 loggerAutoUpdaterSuccess.log('New update available', info.version)
                 
                 if(process.platform === 'darwin'){
-                    info.darwindownload = `https://github.com/ChickenDevLab/NexusLauncher/releases/download/v${info.version}/helioslauncher-setup-${info.version}.dmg`
+                    info.darwindownload = `https://github.com/ChickenDevLab/NexusLauncher/releases/download/v${info.version}/nexuslauncher-setup-${info.version}.dmg`
                     showUpdateUI(info)
                 }
                 
@@ -56,7 +58,7 @@ if(!isDev){
                 break
             case 'update-downloaded':
                 loggerAutoUpdaterSuccess.log('Update ' + info.version + ' ready to be installed.')
-                settingsUpdateButtonStatus('Install Now', false, () => {
+                settingsUpdateButtonStatus('Update jetzt installieren!', false, () => {
                     if(!isDev){
                         ipcRenderer.send('autoUpdateAction', 'installUpdateNow')
                     }
@@ -65,7 +67,7 @@ if(!isDev){
                 break
             case 'update-not-available':
                 loggerAutoUpdater.log('No new update found.')
-                settingsUpdateButtonStatus('Check for Updates')
+                settingsUpdateButtonStatus('Suche nach Updates')
                 break
             case 'ready':
                 updateCheckListener = setInterval(() => {
