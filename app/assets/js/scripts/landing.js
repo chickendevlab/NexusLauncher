@@ -1,3 +1,5 @@
+Translatet
+
 /**
  * Script for landing.ejs
  */
@@ -466,9 +468,9 @@ let proc
 let hasRPC = false
 // Joined server regex
 // Change this if your server uses something different.
-const SERVER_JOINED_REGEX = /\[.+\]: \[CHAT\] [a-zA-Z0-9_]{1,16} joined the game/
-const GAME_JOINED_REGEX = /\[.+\]: Sound engine started/
-const GAME_LAUNCH_REGEX = /^\[.+\]: (?:MinecraftForge .+ Initialized|ModLauncher .+ starting: .+)$/
+//const SERVER_JOINED_REGEX = /\[.+\]: \[CHAT\] [a-zA-Z0-9_]{1,16} joined the game/
+//const GAME_JOINED_REGEX = /\[.+\]: Sound engine started/
+//const GAME_LAUNCH_REGEX = /^\[.+\]: (?:MinecraftForge .+ Initialized|ModLauncher .+ starting: .+)$/
 const MIN_LINGER = 5000
 
 let aEx
@@ -490,7 +492,7 @@ function dlAsync(login = true){
         }
     }
 
-    setLaunchDetails('Please wait..')
+    setLaunchDetails('Bitte warten..')
     toggleLaunchArea(true)
     setLaunchPercentage(0, 100)
 
@@ -521,12 +523,12 @@ function dlAsync(login = true){
     })
     aEx.on('error', (err) => {
         loggerLaunchSuite.error('Error during launch', err)
-        showLaunchFailure('Error During Launch', err.message || 'See console (CTRL + Shift + i) for more details.')
+        showLaunchFailure('Fehler beim Spielstart', err.message || 'Schau in der Konsole (CTRL + Shift + i) f&uuml;r mehr Details.')
     })
     aEx.on('close', (code, signal) => {
         if(code !== 0){
             loggerLaunchSuite.error(`AssetExec exited with code ${code}, assuming error.`)
-            showLaunchFailure('Error During Launch', 'See console (CTRL + Shift + i) for more details.')
+            showLaunchFailure('Fehler beim Spielstart', 'Schau in der Konsole (CTRL + Shift + i) f&uuml;r mehr Details.')
         }
     })
 
@@ -538,27 +540,27 @@ function dlAsync(login = true){
                 case 'distribution':
                     setLaunchPercentage(20, 100)
                     loggerLaunchSuite.log('Validated distibution index.')
-                    setLaunchDetails('Loading version information..')
+                    setLaunchDetails('Lade Versions-Informationen..')
                     break
                 case 'version':
                     setLaunchPercentage(40, 100)
                     loggerLaunchSuite.log('Version data loaded.')
-                    setLaunchDetails('Validating asset integrity..')
+                    setLaunchDetails('&Uuml;berpr&uuml;fe Assets..')
                     break
                 case 'assets':
                     setLaunchPercentage(60, 100)
                     loggerLaunchSuite.log('Asset Validation Complete')
-                    setLaunchDetails('Validating library integrity..')
+                    setLaunchDetails('&Uuml;berpr&uuml;fe Bibliotheken..')
                     break
                 case 'libraries':
                     setLaunchPercentage(80, 100)
                     loggerLaunchSuite.log('Library validation complete.')
-                    setLaunchDetails('Validating miscellaneous file integrity..')
+                    setLaunchDetails('&Uuml;berpr&uuml;fe sonstige Dateien..')
                     break
                 case 'files':
                     setLaunchPercentage(100, 100)
                     loggerLaunchSuite.log('File validation complete.')
-                    setLaunchDetails('Downloading files..')
+                    setLaunchDetails('Lade Dateien herunter..')
                     break
             }
         } else if(m.context === 'progress'){
@@ -576,7 +578,7 @@ function dlAsync(login = true){
                     remote.getCurrentWindow().setProgressBar(2)
 
                     // Download done, extracting.
-                    const eLStr = 'Extracting libraries'
+                    const eLStr = 'Entpacke Bibliotheken'
                     let dotStr = ''
                     setLaunchDetails(eLStr)
                     progressListener = setInterval(() => {
@@ -600,23 +602,23 @@ function dlAsync(login = true){
                         progressListener = null
                     }
 
-                    setLaunchDetails('Preparing to launch..')
+                    setLaunchDetails('Bereite den Start vor..')
                     break
             }
         } else if(m.context === 'error'){
             switch(m.data){
                 case 'download':
-                    loggerLaunchSuite.error('Error while downloading:', m.error)
+                    loggerLaunchSuite.error('Fehler beim Herunterladen:', m.error)
                     
                     if(m.error.code === 'ENOENT'){
                         showLaunchFailure(
-                            'Download Error',
-                            'Could not connect to the file server. Ensure that you are connected to the internet and try again.'
+                            'Download-Fehler',
+                            'Konnte keine Dateien von den Servern herunterladen. Stelle sicher, dass du mit dem Internet verbunden bist und versuche es erneut.'
                         )
                     } else {
                         showLaunchFailure(
-                            'Download Error',
-                            'Check the console (CTRL + Shift + i) for more details. Please try again.'
+                            'Download-Fehler',
+                            '&Uuml;berpr&uuml;fe die Konsole (CTRL + Shift + i) f&uuml;r mehr Details. Bitte versuche es erneut.'
                         )
                     }
 
@@ -640,12 +642,12 @@ function dlAsync(login = true){
                 const authUser = ConfigManager.getSelectedAccount()
                 loggerLaunchSuite.log(`Sending selected account (${authUser.displayName}) to ProcessBuilder.`)
                 let pb = new ProcessBuilder(serv, versionData, authUser, remote.app.getVersion())
-                setLaunchDetails('Launching game..')
+                setLaunchDetails('Starte Spiel..')
 
                 const onLoadComplete = () => {
                     toggleLaunchArea(false)
                     if(hasRPC){
-                        DiscordWrapper.updateDetails('Loading game..')
+                        DiscordWrapper.updateDetails('Lade Spiel..')
                     }
                     proc.stdout.on('data', gameStateChange)
                     proc.stdout.removeListener('data', tempListener)
@@ -670,19 +672,14 @@ function dlAsync(login = true){
 
                 // Listener for Discord RPC.
                 const gameStateChange = function(data){
-                    data = data.trim()
-                    if(SERVER_JOINED_REGEX.test(data)){
-                        DiscordWrapper.updateDetails('Exploring the Realm!')
-                    } else if(GAME_JOINED_REGEX.test(data)){
-                        DiscordWrapper.updateDetails('Sailing to Westeros!')
-                    }
+                    DiscordWrapper.updateDetails('Spielt Minecraft auf MC-Nexus.de')
                 }
 
                 const gameErrorListener = function(data){
                     data = data.trim()
-                    if(data.indexOf('Could not find or load main class net.minecraft.launchwrapper.Launch') > -1){
-                        loggerLaunchSuite.error('Game launch failed, LaunchWrapper was not downloaded properly.')
-                        showLaunchFailure('Error During Launch', 'The main file, LaunchWrapper, failed to download properly. As a result, the game cannot launch.<br><br>To fix this issue, temporarily turn off your antivirus software and launch the game again.<br><br>If you have time, please <a href="https://github.com/ChickenDevLab/NexusLauncher/issues">submit an issue</a> and let us know what antivirus software you use. We\'ll contact them and try to straighten things out.')
+                    if(data.indexOf('Could not find or load main class') > -1){
+                        loggerLaunchSuite.error('Game launch failed, the main class was not found.')
+                        showLaunchFailure('Fehler beim Spielstart', 'Die Hauptklasse konnte nicht geladen werden. Bitte informiere Leon_Delacroixe oder Dr_Dee dar&uumlber')
                     }
                 }
 
@@ -694,7 +691,7 @@ function dlAsync(login = true){
                     proc.stdout.on('data', tempListener)
                     proc.stderr.on('data', gameErrorListener)
 
-                    setLaunchDetails('Done. Enjoy the server!')
+                    setLaunchDetails('Fertig. Viel Spaß!')
 
                     // Init Discord Hook
                     const distro = DistroManager.getDistribution()
@@ -712,7 +709,7 @@ function dlAsync(login = true){
                 } catch(err) {
 
                     loggerLaunchSuite.error('Error during launch', err)
-                    showLaunchFailure('Error During Launch', 'Please check the console (CTRL + Shift + i) for more details.')
+                    showLaunchFailure('Fehler beim Spielstart', '&Uuml;berpr&uuml;fe die Konsole (CTRL + Shift + i) F&uuml;r mehr Details.')
 
                 }
             }
@@ -741,7 +738,7 @@ function dlAsync(login = true){
         }, (err) => {
             loggerLaunchSuite.error('Unable to refresh distribution index.', err)
             if(DistroManager.getDistribution() == null){
-                showLaunchFailure('Fatal Error', 'Could not load a copy of the distribution index. See the console (CTRL + Shift + i) for more details.')
+                showLaunchFailure('Fataler Fehler', 'Konnte keine Informationen f&uuml;r den Launcher laden. Schau in der Konsole (CTRL + Shift + i) f&uuml;r mehr Details.')
 
                 // Disconnect from AssetExec
                 aEx.disconnect()
