@@ -15,7 +15,7 @@ const zlib          = require('zlib')
 const ConfigManager = require('./configmanager')
 const DistroManager = require('./distromanager')
 const isDev         = require('./isdev')
-const { resolve } = require('path')
+const fetch = require('node-fetch')
 
 // Constants
 // const PLATFORM_MAP = {
@@ -1389,9 +1389,10 @@ class AssetGuard extends EventEmitter {
     fetchResourcePack(server){
         const self = this
         return new Promise((resolve, reject) => {
-            request(server.getResourcePackInfoFile(), function (error, response, body) {
-                const json = JSON.parse(body)
-                if (!error) {
+            fetch(server.getResourcePackInfoFile())
+                .catch(err => console.log('Could not fetch Resourcepack', err))
+                .then(res => res.json())
+                .then(function(json){
                     let asset = new Asset(json.id, json.md5, json.size, json.url, path.join(ConfigManager.getInstanceDirectory(), server.getID(), json.path))
                     if(!AssetGuard._validateLocal(asset.to, 'md5', asset.hash)){
                         self.files.dlqueue.push(asset)
@@ -1400,10 +1401,8 @@ class AssetGuard extends EventEmitter {
                     } else {
                         resolve()
                     }
-                }
-                console.log('Could not fetch resourcepack ('+ server.getResourcePackInfoFile() + ')')
-                resolve()
-            })
+                })
+            
         })
     }
 
@@ -1416,6 +1415,7 @@ class AssetGuard extends EventEmitter {
      */
     validateClient(versionData, force = false){
         const self = this
+
         return new Promise((resolve, reject) => {
             const clientData = versionData.downloads.client
             const version = versionData.id
