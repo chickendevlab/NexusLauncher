@@ -382,6 +382,10 @@ class Server {
         return this.address
     }
 
+    getPort(){
+        return this.port
+    }
+
     /**
      * @returns {string} The minecraft version of the server.
      */

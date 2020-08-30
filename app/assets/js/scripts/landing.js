@@ -661,14 +661,7 @@ function dlAsync(login = true){
                 // the client application has started, and we can hide
                 // the progress bar stuff.
                 const tempListener = function(data){
-                    if(GAME_LAUNCH_REGEX.test(data.trim())){
-                        const diff = Date.now()-start
-                        if(diff < MIN_LINGER) {
-                            setTimeout(onLoadComplete, MIN_LINGER-diff)
-                        } else {
-                            onLoadComplete()
-                        }
-                    }
+                    
                 }
 
                 // Listener for Discord RPC.
