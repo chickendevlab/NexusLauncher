@@ -311,12 +311,10 @@ class ProcessBuilder {
 
         if (this.server.isAutoConnect()) {
             const serverargs = this.server.getAddress().split(':')
-            if (serverargs.length === 2) {
-                args.push('--server')
-                args.push(serverargs[0])
-                args.push('--port')
-                args.push(serverargs[1])
-            }
+            args.push('--server')
+            args.push(serverargs[0])
+            args.push('--port')
+            args.push(serverargs[1])
         }
 
         // Filter null values
