@@ -1,5 +1,6 @@
 // Translatet
 
+
 /**
  * Script for landing.ejs
  */
