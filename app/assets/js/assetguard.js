@@ -1392,8 +1392,9 @@ class AssetGuard extends EventEmitter {
             fetch(server.getResourcePackInfoFile())
                 .catch(err => console.log('Could not fetch Resourcepack', err))
                 .then(res => res.json())
-                .then(function(content){
-                    const json = content.resourcepack
+                .then(function(json){
+                    
+                    // const json = content.resourcepack
                     let asset = new Asset(json.id, json.md5, json.size, json.url, path.join(ConfigManager.getInstanceDirectory(), server.getID(), json.path))
                     if(!AssetGuard._validateLocal(asset.to, 'md5', asset.hash)){
                         self.files.dlqueue.push(asset)
