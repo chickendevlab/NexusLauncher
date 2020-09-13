@@ -30,7 +30,7 @@ fancyGraphics:true
 ao:2
 biomeBlendRadius:2
 renderClouds:true
-resourcePacks:["vanilla", "file/NexusPack.zip"]
+resourcePacks:["vanilla", "rp"]
 incompatibleResourcePacks:[]
 lastServer:mc-nexus.de
 lang:de_de
