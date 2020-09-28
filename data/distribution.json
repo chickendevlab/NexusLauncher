@@ -29,6 +29,7 @@
             "optifineVersion": "1.15.2_HD_U_G1_pre30",
             "launchWrapperVersion": "2.1",
             "resourcepack": "https://mc-nexus.de/NexusLauncher/data/resourcepack.json",
+            "missingTexturesVersion": "1.0",
             "modules": [
                 {
                     "id": "optifine:Optifine:1.15.2_HD_U_G1_pre30",
@@ -60,6 +61,16 @@
                         "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/options.txt" 
                     }
                 }
+                {
+                    "id": "de.mcnexus.NexusLauncher:MissingTextures:1.0",
+                    "name": "MissingTextures",
+                    "type": "Library",
+                    "artifact": {
+                        "size": 4689,
+                        "MD5": "63f367779c897b236169e8df3c3f16d9",
+                        "url": "https://chickendevlab.github.io/NexusLauncher/data/libs/de/mcnexus/NexusLauncher/MissingTextures/1.0/MissingTextures.jar"
+                    }
+                },
             ]
         }
     ]

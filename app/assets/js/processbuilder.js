@@ -394,6 +394,7 @@ class ProcessBuilder {
 
         // console.log(this.commonDir, 'libraries', 'optifine', 'Optifine', server.getOptifineVersion(), 'Optifine-' + server.getOptifineVersion() + '.jar')
         // console.log(this.commonDir, 'libraries', 'optifine', 'launchwrapper-of', server.getLaunchWrapperVersion(), 'laucnhwrapper-of-' + server.getLaunchWrapperVersion() + '.jar')
+        paths.push(path.join(this.commonDir, 'libraries/de/mcnexus/NexusLauncher/MissingTextures/' + server.getMissingTexturesVersion() + '/MissingTextures-' + server.getMissingTexturesVersion() + '.jar'))
         paths.push(path.join(this.commonDir, 'libraries/optifine/launchwrapper-of/' + server.getLaunchWrapperVersion() + '/launchwrapper-of-' + server.getLaunchWrapperVersion() + '.jar'))
         paths.push(path.join(this.commonDir, 'libraries/optifine/Optifine/' + server.getOptifineVersion() + '/Optifine-' + server.getOptifineVersion() + '.jar'))
         return paths
