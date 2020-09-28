@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1",
+    "version": "1.0.2",
     "discord": {
         "clientId": "750725647495856149",
         "smallImageText": "Auf Mc-Nexus.de",
@@ -60,6 +60,16 @@
                         "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/options.txt" 
                     }
                 }
+                {
+                    "id": "de.mcnexus.NexusLauncher:MissingTextures:1.0",
+                    "name": "MissingTextures",
+                    "type": "Library",
+                    "artifact": {
+                        "size": 4689,
+                        "MD5": "63f367779c897b236169e8df3c3f16d9",
+                        "url": "https://chickendevlab.github.io/NexusLauncher/data/libs/de/mcnexus/NexusLauncher/MissingTextures/1.0/MissingTextures.jar"
+                    }
+                },
             ]
         }
     ]

@@ -46,7 +46,7 @@ builder.build({
         },
         linux: {
             target: 'AppImage',
-            maintainer: 'Daniel Scalzi, Dr_Dee',
+            maintainer: 'Daniel Scalzi, Dr_Dee, Leon_Delacroixe',
             vendor: 'Daniel Scalzi',
             synopsis: 'Minecraft Launcher für MC-Nexus.de',
             description: '---',
