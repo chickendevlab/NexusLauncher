@@ -59,7 +59,7 @@
                         "path": "options.txt",
                         "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/options.txt" 
                     }
-                }
+                },
                 {
                     "id": "de.mcnexus.NexusLauncher:MissingTextures:1.0",
                     "name": "MissingTextures",
@@ -69,7 +69,7 @@
                         "MD5": "63f367779c897b236169e8df3c3f16d9",
                         "url": "https://chickendevlab.github.io/NexusLauncher/data/libs/de/mcnexus/NexusLauncher/MissingTextures/1.0/MissingTextures.jar"
                     }
-                },
+                }
             ]
         }
     ]
