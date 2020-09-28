@@ -426,10 +426,6 @@ class Server {
         return this.resourcepack
     }
 
-    getMissingTexturesVersion(){
-        return this.missingTexturesVersion
-    }
-
     getModules() {
         return this.modules
     }
