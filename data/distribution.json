@@ -49,16 +49,7 @@
                         "url": "https://ChickenDevLab.github.io/NexusLauncher/data/libs/optifine/launchwrapper-of/2.1/launchwrapper.jar"
                     }
                 },
-                {
-                    "id": "options.txt",
-                    "type": "File",
-                    "artifact": {
-                        "size": 2834,
-                        "MD5": "F9C2055F49B3120B3A3F7D5B4CCA5F41",
-                        "path": "options.txt",
-                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/options.txt" 
-                    }
-                },
+               
                 {
                     "id": "de.mcnexus:NexusPack:1.1",
                     "type": "File",
