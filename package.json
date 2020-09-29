@@ -34,7 +34,7 @@
     "fs-extra": "^9.0.1",
     "github-syntax-dark": "^0.5.0",
     "jquery": "^3.5.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "register-scheme": "github:devsnek/node-register-scheme",
     "request": "^2.88.2",
     "semver": "^7.3.2",
