@@ -60,6 +60,17 @@
                         "url": "https://mc-nexus.de/downloads/NexusPack.zip"
                     }
                 }
+                {
+                    "id": "options.txt",
+                    "type": "File",
+                    "artifact":{
+                        "size": 2848,
+                        "MD5": "77a7553c6dbd5b7be9200284769512b9",
+                        "path": "options.txt",
+                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/options.txt"
+                    }
+                }
+
             ]
         }
     ]
