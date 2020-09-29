@@ -1,5 +1,3 @@
-// Translatet
-
 // Requirements
 const os     = require('os')
 const semver = require('semver')
@@ -361,10 +359,10 @@ function bindAuthAccountLogOut(){
             if(Object.keys(ConfigManager.getAuthAccounts()).length === 1){
                 isLastAccount = true
                 setOverlayContent(
-                    'Warnung<br>Dies ist dein letzter Account',
-                    'Um den Launcher zu nutzen ben&ouml;tigst du mindestens einen Account. Du musst dich dann sp&auml;ter erneut einloggen.<br><br>Sicher, dass du dich ausloggen m&ouml;chtest?',
-                    'Ja, ich bin mir sicher!',
-                    'Nein, abbrechen!'
+                    'Warning<br>This is Your Last Account',
+                    'In order to use the launcher you must be logged into at least one account. You will need to login again after.<br><br>Are you sure you want to log out?',
+                    'I\'m Sure',
+                    'Cancel'
                 )
                 setOverlayHandler(() => {
                     processLogOut(val, isLastAccount)
@@ -422,7 +420,7 @@ function refreshAuthAccountSelected(uuid){
             if(selBtn.hasAttribute('selected')){
                 selBtn.removeAttribute('selected')
             }
-            selBtn.innerHTML = 'W&auml;hle deinen Account'
+            selBtn.innerHTML = 'Select Account'
         }
     })
 }
@@ -451,7 +449,7 @@ function populateAuthAccounts(){
             <div class="settingsAuthAccountRight">
                 <div class="settingsAuthAccountDetails">
                     <div class="settingsAuthAccountDetailPane">
-                        <div class="settingsAuthAccountDetailTitle">Benutzername</div>
+                        <div class="settingsAuthAccountDetailTitle">Username</div>
                         <div class="settingsAuthAccountDetailValue">${acc.displayName}</div>
                     </div>
                     <div class="settingsAuthAccountDetailPane">
@@ -460,9 +458,9 @@ function populateAuthAccounts(){
                     </div>
                 </div>
                 <div class="settingsAuthAccountActions">
-                    <button class="settingsAuthAccountSelect" ${selectedUUID === acc.uuid ? 'selected>Ausgew&auml;hlter Account &#10004;' : '>W&auml;hle Account'}</button>
+                    <button class="settingsAuthAccountSelect" ${selectedUUID === acc.uuid ? 'selected>Selected Account &#10004;' : '>Select Account'}</button>
                     <div class="settingsAuthAccountWrapper">
-                        <button class="settingsAuthAccountLogOut">Logout</button>
+                        <button class="settingsAuthAccountLogOut">Log Out</button>
                     </div>
                 </div>
             </div>
@@ -1142,12 +1140,12 @@ function populateJavaExecDetails(execPath){
     jg._validateJavaBinary(execPath).then(v => {
         if(v.valid){
             if(v.version.major < 9) {
-                settingsJavaExecDetails.innerHTML = `Ausgew&auml;hlt: Java ${v.version.major} Update ${v.version.update} (x${v.arch})`
+                settingsJavaExecDetails.innerHTML = `Selected: Java ${v.version.major} Update ${v.version.update} (x${v.arch})`
             } else {
-                settingsJavaExecDetails.innerHTML = `Ausgew&auml;hlt: Java ${v.version.major}.${v.version.minor}.${v.version.revision} (x${v.arch})`
+                settingsJavaExecDetails.innerHTML = `Selected: Java ${v.version.major}.${v.version.minor}.${v.version.revision} (x${v.arch})`
             }
         } else {
-            settingsJavaExecDetails.innerHTML = 'Ung&uuml;ltige Auswahl'
+            settingsJavaExecDetails.innerHTML = 'Invalid Selection'
         }
     })
 }
@@ -1221,7 +1219,7 @@ function populateAboutVersionInformation(){
  */
 function populateReleaseNotes(){
     $.ajax({
-        url: 'https://github.com/ChickenDevLab/NexusLauncher/releases.atom',
+        url: 'https://github.com/dscalzi/HeliosLauncher/releases.atom',
         success: (data) => {
             const version = 'v' + remote.app.getVersion()
             const entries = $(data).find('entry')
@@ -1241,7 +1239,7 @@ function populateReleaseNotes(){
         },
         timeout: 2500
     }).catch(err => {
-        settingsAboutChangelogText.innerHTML = 'Infos herunterladen fehlgeschlagen.'
+        settingsAboutChangelogText.innerHTML = 'Failed to load release notes.'
     })
 }
 
@@ -1289,27 +1287,27 @@ function settingsUpdateButtonStatus(text, disabled = false, handler = null){
  */
 function populateSettingsUpdateInformation(data){
     if(data != null){
-        settingsUpdateTitle.innerHTML = `New ${isPrerelease(data.version) ? 'Pre-Release' : 'Release'} verf&uuml;gbar`
+        settingsUpdateTitle.innerHTML = `New ${isPrerelease(data.version) ? 'Pre-release' : 'Release'} Available`
         settingsUpdateChangelogCont.style.display = null
         settingsUpdateChangelogTitle.innerHTML = data.releaseName
         settingsUpdateChangelogText.innerHTML = data.releaseNotes
         populateVersionInformation(data.version, settingsUpdateVersionValue, settingsUpdateVersionTitle, settingsUpdateVersionCheck)
         
         if(process.platform === 'darwin'){
-            settingsUpdateButtonStatus('Herrunterladen von GitHub<span style="font-size: 10px;color: gray;text-shadow: none !important;">Schließe den Launcher und starte die .dmg-Datei.</span>', false, () => {
+            settingsUpdateButtonStatus('Download from GitHub<span style="font-size: 10px;color: gray;text-shadow: none !important;">Close the launcher and run the dmg to update.</span>', false, () => {
                 shell.openExternal(data.darwindownload)
             })
         } else {
-            settingsUpdateButtonStatus('Herrunterladen..', true)
+            settingsUpdateButtonStatus('Downloading..', true)
         }
     } else {
-        settingsUpdateTitle.innerHTML = 'Du nutzt bereits die aktuellste Version'
+        settingsUpdateTitle.innerHTML = 'You Are Running the Latest Version'
         settingsUpdateChangelogCont.style.display = 'none'
         populateVersionInformation(remote.app.getVersion(), settingsUpdateVersionValue, settingsUpdateVersionTitle, settingsUpdateVersionCheck)
-        settingsUpdateButtonStatus('Schaue nach Updates', false, () => {
+        settingsUpdateButtonStatus('Check for Updates', false, () => {
             if(!isDev){
                 ipcRenderer.send('autoUpdateAction', 'checkForUpdate')
-                settingsUpdateButtonStatus('Schaue nach Updates..', true)
+                settingsUpdateButtonStatus('Checking for Updates..', true)
             }
         })
     }

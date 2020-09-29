@@ -15,7 +15,6 @@ const zlib          = require('zlib')
 const ConfigManager = require('./configmanager')
 const DistroManager = require('./distromanager')
 const isDev         = require('./isdev')
-const fetch = require('node-fetch')
 
 // Constants
 // const PLATFORM_MAP = {
@@ -1376,7 +1375,7 @@ class AssetGuard extends EventEmitter {
      * @param {Object} versionData The version data for the assets.
      * @returns {Promise.<void>} An empty promise to indicate the async processing has completed.
      */
-    validateMiscellaneous(versionData, server){
+    validateMiscellaneous(versionData){
         const self = this
         return new Promise(async (resolve, reject) => {
             await self.validateClient(versionData)
@@ -1384,7 +1383,6 @@ class AssetGuard extends EventEmitter {
             resolve()
         })
     }
-
 
     /**
      * Validate client file - artifact renamed from client.jar to '{version}'.jar.
@@ -1395,7 +1393,6 @@ class AssetGuard extends EventEmitter {
      */
     validateClient(versionData, force = false){
         const self = this
-
         return new Promise((resolve, reject) => {
             const clientData = versionData.downloads.client
             const version = versionData.id
@@ -1882,7 +1879,7 @@ class AssetGuard extends EventEmitter {
             this.emit('validate', 'assets')
             await this.validateLibraries(versionData)
             this.emit('validate', 'libraries')
-            await this.validateMiscellaneous(versionData, server)
+            await this.validateMiscellaneous(versionData)
             this.emit('validate', 'files')
             await this.processDlQueues()
             //this.emit('complete', 'download')

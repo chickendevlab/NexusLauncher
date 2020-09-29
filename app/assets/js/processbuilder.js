@@ -180,14 +180,30 @@ class ProcessBuilder {
      * @param {string} tempNativePath The path to store the native libraries.
      * @returns {Array.<string>} An array containing the full JVM arguments for this process.
      */
-
     constructJVMArguments(tempNativePath) {
+
+        return this._constructJVMArguments113(tempNativePath)
+
+    }
+
+    /**
+     * Construct the argument array that will be passed to the JVM process.
+     * This function is for 1.13+
+     * 
+     * Note: Required Libs https://github.com/MinecraftForge/MinecraftForge/blob/af98088d04186452cb364280340124dfd4766a5c/src/fmllauncher/java/net/minecraftforge/fml/loading/LibraryFinder.java#L82
+     * 
+     * @param {Array.<Object>} mods An array of enabled mods which will be launched with this process.
+     * @param {string} tempNativePath The path to store the native libraries.
+     * @returns {Array.<string>} An array containing the full JVM arguments for this process.
+     */
+    _constructJVMArguments113(tempNativePath) {
 
         const argDiscovery = /\${*(.*)}/
 
         // JVM Arguments First
         let args = this.versionData.arguments.jvm
 
+        //args.push('-Dlog4j.configurationFile=D:\\WesterosCraft\\game\\common\\assets\\log_configs\\client-1.12.xml')
 
         // Java Arguments
         if (process.platform === 'darwin') {
@@ -309,16 +325,7 @@ class ProcessBuilder {
             }
         }
 
-        if (this.server.isAutoConnect()) {
-            args.push('--server')
-            args.push(this.server.getAddress())
-            args.push('--port')
-            if (this.server.getPort()) {
-                args.push(this.server.getPort())
-            } else {
-                args.push('25565')
-            }
-        }
+
 
         // Filter null values
         args = args.filter(arg => {
@@ -394,8 +401,7 @@ class ProcessBuilder {
 
         // console.log(this.commonDir, 'libraries', 'optifine', 'Optifine', server.getOptifineVersion(), 'Optifine-' + server.getOptifineVersion() + '.jar')
         // console.log(this.commonDir, 'libraries', 'optifine', 'launchwrapper-of', server.getLaunchWrapperVersion(), 'laucnhwrapper-of-' + server.getLaunchWrapperVersion() + '.jar')
-        paths.push(path.join(this.commonDir, 'libraries/de/mcnexus/NexusLauncher/MissingTextures/1.0/MissingTextures-1.0.jar'))
-        paths.push(path.join(this.commonDir, 'libraries/optifine/launchwrapper-of/' + server.getLaunchWrapperVersion() + '/launchwrapper-of-' + server.getLaunchWrapperVersion() + '.jar'))
+        paths.push(path.join(this.commonDir, 'libraries/optifine/launchwrapper-of/' + server.getLaunchWrapperVersion() +  '/launchwrapper-of-' + server.getLaunchWrapperVersion() + '.jar'))
         paths.push(path.join(this.commonDir, 'libraries/optifine/Optifine/' + server.getOptifineVersion() + '/Optifine-' + server.getOptifineVersion() + '.jar'))
         return paths
     }

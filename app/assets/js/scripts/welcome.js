@@ -1,5 +1,3 @@
-//Nothing to translate
-
 /**
  * Script for welcome.ejs
  */
