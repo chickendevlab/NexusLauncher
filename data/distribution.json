@@ -59,7 +59,7 @@
                         "path": "resourcepacks/NexusPack.zip",
                         "url": "https://mc-nexus.de/downloads/NexusPack.zip"
                     }
-                }
+                },
                 {
                     "id": "options.txt",
                     "type": "File",
