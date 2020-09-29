@@ -418,14 +418,6 @@ class Server {
         return this.launchWrapperVersion
     }
 
-    /**
-     * @returns {Array.<Module>} An array of modules for this server.
-     */
-
-    getResourcePackInfoFile() {
-        return this.resourcepack
-    }
-
     getModules() {
         return this.modules
     }
