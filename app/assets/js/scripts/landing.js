@@ -23,6 +23,8 @@ const user_text               = document.getElementById('user_text')
 
 const loggerLanding = LoggerUtil('%c[Landing]', 'color: #000668; font-weight: bold')
 
+let games = 0
+
 /* Launch Progress Wrapper Functions */
 
 /**
@@ -85,6 +87,11 @@ function setLaunchEnabled(val){
 
 // Bind launch button
 document.getElementById('launch_button').addEventListener('click', function(e){
+    if(games >= 1){
+        if(!confirm(games == 1 ? 'Es läuft bereits eine Minecraft-Instanz\nMöchtest du trotzdem noch eine weitere starten?' : 'Es laufen bereits mehrere Minecraft-Instanzen!\nMöchtest du trotzdem noch eine weitere starten?')){
+            return
+        }
+    }
     loggerLanding.log('Launching game..')
     const mcVersion = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getMinecraftVersion()
     const jExe = ConfigManager.getJavaExecutable()
@@ -478,6 +485,7 @@ let forgeData
 
 let progressListener
 
+
 function dlAsync(login = true){
 
     // Login parameter is temporary for debug purposes. Allows testing the validation/downloads without
@@ -689,12 +697,14 @@ function dlAsync(login = true){
                 try {
                     // Build Minecraft process.
                     proc = pb.build()
+                    
 
                     // Bind listeners to stdout.
                     proc.stdout.on('data', tempListener)
                     proc.stderr.on('data', gameErrorListener)
 
-                    setLaunchDetails('Done. Enjoy the server!')
+                    toggleLaunchArea(false)
+                    games++
 
                     // Init Discord Hook
                     const distro = DistroManager.getDistribution()
@@ -706,6 +716,7 @@ function dlAsync(login = true){
                             DiscordWrapper.shutdownRPC()
                             hasRPC = false
                             proc = null
+                            games--
                         })
                     }
 
