@@ -403,7 +403,7 @@ class Server {
      * by default.
      */
     isAutoConnect(){
-        return this.autoconnect
+        return this.autoConnect
     }
 
     getOptifineVersion(){
