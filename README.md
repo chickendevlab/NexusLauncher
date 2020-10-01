@@ -4,7 +4,8 @@
 
 <em><h5 align="center">(formerly Electron Launcher)</h5></em>
 
-[<p align="center"><img src="https://img.shields.io/travis/dscalzi/HeliosLauncher.svg?style=for-the-badge" alt="travis">](https://travis-ci.org/dscalzi/HeliosLauncher) [<img src="https://img.shields.io/github/downloads/dscalzi/HeliosLauncher/total.svg?style=for-the-badge" alt="downloads">](https://github.com/ChickenDevLab/NexusLauncher/releases) <img src="https://forthebadge.com/images/badges/winter-is-coming.svg"  height="28px" alt="stark"></p>
+[![Build Status](https://travis-ci.org/ChickenDevLab/NexusLauncher.svg?branch=master)](https://travis-ci.org/ChickenDevLab/NexusLauncher)
+[<img src="https://img.shields.io/github/downloads/ChickenDevLab/NexusLauncher/total.svg?style=for-the-badge" alt="downloads">](https://github.com/ChickenDevLab/NexusLauncher/releases) <img src="https://forthebadge.com/images/badges/winter-is-coming.svg"  height="28px" alt="stark"></p>
 
 <p align="center">Join modded servers without worrying about installing Java, Forge, or other mods. We'll handle that for you.</p>
 
@@ -42,10 +43,10 @@ You can download from [GitHub Releases](https://github.com/ChickenDevLab/NexusLa
 
 #### Latest Release
 
-[![](https://img.shields.io/github/release/dscalzi/HeliosLauncher.svg?style=flat-square)](https://github.com/ChickenDevLab/NexusLauncher/releases/latest)
+[![](https://img.shields.io/github/release/ChickenDevLab/NexusLauncher.svg?style=flat-square)](https://github.com/ChickenDevLab/NexusLauncher/releases/latest)
 
 #### Latest Pre-Release
-[![](https://img.shields.io/github/release/dscalzi/HeliosLauncher/all.svg?style=flat-square)](https://github.com/ChickenDevLab/NexusLauncher/releases)
+[![](https://img.shields.io/github/release/ChickenDevLab/NexusLauncher/all.svg?style=flat-square)](https://github.com/ChickenDevLab/NexusLauncher/releases)
 
 **Supported Platforms**
 
