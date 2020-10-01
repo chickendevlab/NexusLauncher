@@ -4,7 +4,7 @@ const crypto = require('crypto')
 const fs = require('fs-extra')
 const os = require('os')
 const path = require('path')
-const { URL } = require('url')
+//const { URL } = require('url')
 
 const { Library } = require('./assetguard')
 const ConfigManager = require('./configmanager')
@@ -35,14 +35,12 @@ class ProcessBuilder {
         fs.ensureDirSync(this.gameDir)
         const tempNativePath = path.join(os.tmpdir(), ConfigManager.getTempNativeFolder(), crypto.pseudoRandomBytes(16).toString('hex'))
         process.throwDeprecation = true
-        this.setupLiteLoader()
-        logger.log('Using liteloader:', this.usingLiteLoader)
+        
 
 
 
         let args = this.constructJVMArguments(tempNativePath)
-
-
+        
         logger.log('Launch Arguments:', args)
         let exists = false
         for (let i = 0; i < args.length; i++) {
@@ -112,32 +110,7 @@ class ProcessBuilder {
         return modCfg != null ? ((typeof modCfg === 'boolean' && modCfg) || (typeof modCfg === 'object' && (typeof modCfg.value !== 'undefined' ? modCfg.value : true))) : required != null ? required.isDefault() : true
     }
 
-    /**
-     * Function which performs a preliminary scan of the top level
-     * mods. If liteloader is present here, we setup the special liteloader
-     * launch options. Note that liteloader is only allowed as a top level
-     * mod. It must not be declared as a submodule.
-     */
-    setupLiteLoader() {
-        for (let ll of this.server.getModules()) {
-            if (ll.getType() === DistroManager.Types.LiteLoader) {
-                if (!ll.getRequired().isRequired()) {
-                    const modCfg = ConfigManager.getModConfiguration(this.server.getID()).mods
-                    if (ProcessBuilder.isModEnabled(modCfg[ll.getVersionlessID()], ll.getRequired())) {
-                        if (fs.existsSync(ll.getArtifact().getPath())) {
-                            this.usingLiteLoader = true
-                            this.llPath = ll.getArtifact().getPath()
-                        }
-                    }
-                } else {
-                    if (fs.existsSync(ll.getArtifact().getPath())) {
-                        this.usingLiteLoader = true
-                        this.llPath = ll.getArtifact().getPath()
-                    }
-                }
-            }
-        }
-    }
+    
 
     /**
      * Resolve an array of all enabled mods. These mods will be constructed into
@@ -161,17 +134,19 @@ class ProcessBuilder {
      */
 
 
-    _processAutoConnectArg(args) {
-        if (ConfigManager.getAutoConnect() && this.server.isAutoConnect()) {
-            const serverURL = new URL('my://' + this.server.getAddress())
-            args.push('--server')
-            args.push(serverURL.hostname)
-            if (serverURL.port) {
-                args.push('--port')
-                args.push(serverURL.port)
-            }
-        }
-    }
+    // _processAutoConnectArg(args) {
+    //     if (ConfigManager.getAutoConnect() && this.server.isAutoConnect()) {
+    //         const serverURL = new URL('my://' + this.server.getAddress())
+    //         for(let i = 0 ; i<args.length; i++){
+    //             if(args[i] === '--fullscreen' || args[i] === '--width'){
+    //                 args.splice(i-1, 0, '--server', serverURL.hostname)
+    //                 if(serverURL.port){
+    //                     args.splice(i + 1, '--port', serverURL.port)
+    //                 }
+    //             }
+    //         }            
+    //     }
+    // }
 
     /**
      * Construct the argument array that will be passed to the JVM process.

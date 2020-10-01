@@ -68,6 +68,16 @@
                         "path": "options.txt",
                         "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/options.txt"
                     }
+                },
+                {
+                    "id": "servers.dat",
+                    "type": "File",
+                    "artifact":{
+                        "size": 14123,
+                        "MD5": "6654222f1e735922806d59462cc2729e",
+                        "path": "servers.dat",
+                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/servers.dat"
+                    }
                 }
 
             ]
