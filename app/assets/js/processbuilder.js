@@ -307,18 +307,7 @@ class ProcessBuilder {
                     }
                 }
             }
-        }
-
-        if (this.server.isAutoConnect()) {
-            args.push('--server')
-            args.push(this.server.getAddress())
-            args.push('--port')
-            if (this.server.getPort()) {
-                args.push(this.server.getPort())
-            } else {
-                args.push('25565')
-            }
-        }
+        }        
 
         // Filter null values
         args = args.filter(arg => {
