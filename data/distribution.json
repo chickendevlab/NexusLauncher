@@ -55,7 +55,6 @@
                     "type": "File",
                     "artifact": {
                         "size": 2841,
-                        "MD5": "531155f9f49665716261708c2753fbb5",
                         "path": "options.txt",
                         "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/options.txt" 
                     }
