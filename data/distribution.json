@@ -14,7 +14,7 @@
             "id": "MC-Nexus",
             "name": "MC-Nexus",
             "description": "BlablaBla2",
-            "icon": "http://mc.westeroscraft.com/WesterosCraftLauncher/files/server-prod.png",
+            "icon": "http://ChickenDevLab.github.io/NexusLauncher/app/assets/images/SealCircle.png",
             "version": "1.0",
             "address": "mc-nexus.de",
             "port": 25565,
@@ -54,22 +54,12 @@
                     "id": "options.txt",
                     "type": "File",
                     "artifact": {
-                        "size": 2834,
-                        "MD5": "F9C2055F49B3120B3A3F7D5B4CCA5F41",
+                        "size": 2841,
+                        "MD5": "531155f9f49665716261708c2753fbb5",
                         "path": "options.txt",
                         "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/options.txt" 
                     }
-                },
-                {
-                    "id": "de.mcnexus.NexusLauncher:MissingTextures:1.0",
-                    "name": "MissingTextures",
-                    "type": "Library",
-                    "artifact": {
-                        "size": 4689,
-                        "MD5": "63f367779c897b236169e8df3c3f16d9",
-                        "url": "https://chickendevlab.github.io/NexusLauncher/data/libs/de/mcnexus/NexusLauncher/MissingTextures/1.0/MissingTextures.jar"
-                    }
-                }
+                }               
             ]
         }
     ]
