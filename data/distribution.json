@@ -11,8 +11,8 @@
     "rss": "https://forum.mc-nexus.de/index.php?board-feed/",
     "servers": [
         {
-            "id": "MC-Nexus",
-            "name": "MC-Nexus",
+            "id": "main",
+            "name": "Main & Bauserver",
             "description": "BlablaBla2",
             "icon": "http://ChickenDevLab.github.io/NexusLauncher/app/assets/images/SealCircle.png",
             "version": "1.0",
@@ -22,7 +22,7 @@
             "discord": {
                 "shortId": "1.15.2 Main Server",
                 "largeImageText": "Mc-Nexus 1.15.2",
-                "largeImageKey": "server-prod"
+                "largeImageKey": "seal-circle"
             },
             "mainServer": true,
             "autoconnect": true,
@@ -48,6 +48,57 @@
                         "size": 15638,
                         "MD5": "df32100e0d67fd1a7133153c976edbcf",
                         "url": "https://ChickenDevLab.github.io/NexusLauncher/data/libs/optifine/launchwrapper-of/2.1/launchwrapper.jar"
+                    }
+                },
+                {
+                    "id": "options.txt",
+                    "type": "File",
+                    "artifact": {
+                        "size": 2841,
+                        "path": "options.txt",
+                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/options.txt" 
+                    }
+                }               
+            ]
+        },
+        {
+            "id": "beta",
+            "name": "Beta-Server",
+            "description": "BlablaBla2",
+            "icon": "http://ChickenDevLab.github.io/NexusLauncher/app/assets/images/SealCircle.png",
+            "version": "1.0",
+            "address": "31.214.144.196",
+            "port": 25565,
+            "minecraftVersion": "1.16.3",
+            "discord": {
+                "shortId": "1.16.3 Betaserver",
+                "largeImageText": "1.16.3 Betaserver",
+                "largeImageKey": "seal-circle"
+            },
+            "mainServer": true,
+            "autoconnect": true,
+            "optifineVersion": "1.16.3_HD_U_G3",
+            "launchWrapperVersion": "2.2",
+            "resourcepack": "https://mc-nexus.de/NexusLauncher/data/resourcepack.json",
+            "modules": [
+                {
+                    "id": "optifine:Optifine:1.16.3_HD_U_G3",
+                    "name": "Optifine",
+                    "type": "Library",
+                    "artifact": {
+                        "size": 5265895,
+                        "MD5": "e60aa6e5a27de24bf1ff76e37d6cf70d",
+                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/libs/optifine/Optifine/1.16.3_HD_U_G3/optifine.jar"
+                    }
+                },
+                {
+                    "id": "optifine:launchwrapper-of:2.2",
+                    "name": "Launchwrapper",
+                    "type": "Library",
+                    "artifact": {
+                        "size": 15900,
+                        "MD5": "3b1ace749885406d51ebe762cf9adfed",
+                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/libs/optifine/launchwrapper-of/2.2/launchwrapper.jar"
                     }
                 },
                 {
