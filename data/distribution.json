@@ -89,7 +89,6 @@
             "autoconnect": true,
             "optifineVersion": "1.16.3_HD_U_G3",
             "launchWrapperVersion": "2.2",
-            "resourcepack": "https://mc-nexus.de/NexusLauncher/data/resourcepack.json",
             "modules": [
                 {
                     "id": "optifine:Optifine:1.16.3_HD_U_G3",
@@ -112,15 +111,6 @@
                     }
                 },
                 {
-                    "id": "options.txt",
-                    "type": "File",
-                    "artifact": {
-                        "size": 2994,
-                        "path": "options.txt",
-                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/beta/options.txt" 
-                    }
-                },
-                {
                     "id": "servers.dat",
                     "type": "File",
                     "artifact": {
@@ -129,7 +119,16 @@
                         "path": "servers.dat",
                         "url": "https://ChickenDevLab.github.io/NexusLauncher/data/lists/beta/servers.dat" 
                     }
-                }                 
+                },
+                {
+                    "id": "options.txt",
+                    "type": "File",
+                    "artifact": {
+                        "size": 2916,
+                        "path": "options.txt",
+                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/beta/options.txt" 
+                    }
+                }               
             ]
         }
     ]

@@ -1388,7 +1388,11 @@ class AssetGuard extends EventEmitter {
 
     fetchResourcePack(server){
         const self = this
+        
         return new Promise((resolve, reject) => {
+            if(!server.getResourcePackInfoFile()){
+                resolve()
+            }
             fetch(server.getResourcePackInfoFile())
                 .catch(err => console.log('Could not fetch Resourcepack', err))
                 .then(res => res.json())
