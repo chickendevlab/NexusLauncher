@@ -88,8 +88,7 @@ function setLaunchEnabled(val) {
 let cnt = 0
 // Bind launch button
 document.getElementById('launch_button').addEventListener('click', function (e) {
-    console.log('Running instances:', cnt)
-    
+        
     if (cnt >= 1 && confirm('Es läuft bereits mindestens eine Instanz von Minecraft.\nMöchtest du trotzdem noch eine Weitere Starten?')) {
         cnt = cnt + 1
         loggerLanding.log('Launching game (Instance: ${cnt})..')
@@ -754,7 +753,7 @@ function dlAsync(login = true) {
     // Begin Validations
 
     // Validate Forge files.
-    setLaunchDetails('Loading server information..')
+    setLaunchDetails('Lade Serverinformationen..')
 
     refreshDistributionIndex(true, (data) => {
         onDistroRefresh(data)
