@@ -1,6 +1,6 @@
 {
   "name": "nexuslauncher",
-  "version": "1.8.0",
+  "version": "1.9.1",
   "productName": "Nexus Launcher",
   "description": "Costum Minecraft Launcher (with Optifine) for MC-Nexus.de",
   "author": "Leon_Delacroixe",
@@ -37,6 +37,7 @@
     "node-fetch": "^2.6.1",
     "register-scheme": "github:devsnek/node-register-scheme",
     "request": "^2.88.2",
+    "rimraf": "^3.0.2",
     "semver": "^7.3.2",
     "tar-fs": "^2.1.0",
     "winreg": "^1.2.4"

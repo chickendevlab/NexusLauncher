@@ -965,6 +965,28 @@ body, button {
     text-shadow: none;
 }
 
+.settingsResetItem {
+    background: none;
+    border: none;
+    text-align: left;
+    margin: 5px 0px;
+    padding: 0px 20px;
+    color: grey;
+    cursor: pointer;
+    outline: none;
+    transition: 0.25s ease;
+}
+.settingsResetItem:hover,
+.settingsNavItem:focus {
+    color: #c1c1c1;
+    text-shadow: 0px 0px 20px #c1c1c1;
+}
+.settingsResetItem[selected] {
+    cursor: default;
+    color: white;
+    text-shadow: none;
+}
+
 /* Div to add some space between nav items. */
 .settingsNavSpacer {
     height: 25px;
