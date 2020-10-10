@@ -12,8 +12,8 @@
     "servers": [
         {
             "id": "main",
-            "name": "Main & Bauserver",
-            "description": "BlablaBla2",
+            "name": "Main-Server",
+            "description": "Hauptserver von Mc-Nexus.de",
             "icon": "http://ChickenDevLab.github.io/NexusLauncher/app/assets/images/SealCircle.png",
             "version": "1.0",
             "address": "mc-nexus.de",
@@ -63,8 +63,8 @@
                     "id": "servers.dat",
                     "type": "File",
                     "artifact": {
-                        "size": 14188,
-                        "MD5": "729415fd14936bcc1356be590913eea2",
+                        "size": 14117,
+                        "MD5": "8c901cac4eeb4a6bfbed34aa0575eb43",
                         "path": "servers.dat",
                         "url": "https://ChickenDevLab.github.io/NexusLauncher/data/lists/main/servers.dat" 
                     }
@@ -74,7 +74,7 @@
         {
             "id": "beta",
             "name": "Beta-Server",
-            "description": "BlablaBla2",
+            "description": "Beta-Server von Mc-Nexus.de - Testserver für Minecraft 1.16.3",
             "icon": "http://ChickenDevLab.github.io/NexusLauncher/app/assets/images/SealCircle.png",
             "version": "1.0",
             "address": "31.214.144.196",
