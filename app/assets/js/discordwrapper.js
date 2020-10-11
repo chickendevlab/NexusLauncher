@@ -8,11 +8,13 @@ let activity
 
 exports.initRPC = function(genSettings, servSettings, initialDetails = 'Mc-Nexus | Deine Minecraft Community | Dein RPG-Server'){
     client = new Client({ transport: 'ipc' })
+    const arr = new Array(0, 1, 2, 3, 4, 5, 6, 7)
+    const item = arr[Math.floor(Math.random() * arr.length)].toString
 
     activity = {
         details: initialDetails,
         state: 'Server: ' + servSettings.shortId,
-        largeImageKey: servSettings.largeImageKey,
+        largeImageKey: item,
         largeImageText: servSettings.largeImageText,
         smallImageKey: genSettings.smallImageKey,
         smallImageText: genSettings.smallImageText,
