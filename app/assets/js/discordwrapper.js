@@ -25,7 +25,7 @@ exports.initRPC = function(genSettings, servSettings, initialDetails = 'Mc-Nexus
     client.on('ready', () => {
         logger.log('Discord RPC Connected')
         client.setActivity(activity)
-        logger.log(activity)
+
     })
     
     client.login({clientId: genSettings.clientId}).catch(error => {
