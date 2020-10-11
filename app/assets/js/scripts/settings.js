@@ -1209,7 +1209,7 @@ function isPrerelease(version) {
 function populateVersionInformation(version, valueElement, titleElement, checkElement) {
     valueElement.innerHTML = version
     if (isPrerelease(version)) {
-        titleElement.innerHTML = 'Pre-release'
+        titleElement.innerHTML = 'PreRelease'
         titleElement.style.color = '#ff886d'
         checkElement.style.background = '#ff886d'
     } else {

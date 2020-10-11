@@ -9,7 +9,7 @@ let activity
 exports.initRPC = function(genSettings, servSettings, initialDetails = 'Mc-Nexus | Deine Minecraft Community | Dein RPG-Server'){
     client = new Client({ transport: 'ipc' })
     const arr = new Array(0, 1, 2, 3, 4, 5, 6, 7)
-    const item = arr[Math.floor(Math.random() * arr.length)].toString
+    const item = arr[Math.floor(Math.random() * arr.length)].toString()
 
     activity = {
         details: initialDetails,
@@ -25,6 +25,7 @@ exports.initRPC = function(genSettings, servSettings, initialDetails = 'Mc-Nexus
     client.on('ready', () => {
         logger.log('Discord RPC Connected')
         client.setActivity(activity)
+        logger.log(activity)
     })
     
     client.login({clientId: genSettings.clientId}).catch(error => {
