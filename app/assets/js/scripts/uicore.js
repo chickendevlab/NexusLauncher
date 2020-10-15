@@ -7,7 +7,7 @@
  * modules, excluding dependencies.
  */
 // Requirements
-const $                                      = require('jquery')
+const $ = jQuery                             = require('jquery')
 const {ipcRenderer, remote, shell, webFrame} = require('electron')
 const isDev                                  = require('./assets/js/isdev')
 const LoggerUtil                             = require('./assets/js/loggerutil')
