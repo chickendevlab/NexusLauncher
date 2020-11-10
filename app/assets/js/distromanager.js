@@ -426,6 +426,10 @@ class Server {
         return this.resourcepack
     }
 
+    getResetId(){
+        return this.resetId
+    }
+
     getModules() {
         return this.modules
     }

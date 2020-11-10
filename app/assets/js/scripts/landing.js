@@ -8,6 +8,7 @@
 const cp = require('child_process')
 const crypto = require('crypto')
 const { URL } = require('url')
+const fs = require('fs')
 
 // Internal Requirements
 const DiscordWrapper = require('./assets/js/discordwrapper')
@@ -93,6 +94,17 @@ document.getElementById('launch_button').addEventListener('click', function (e) 
         cnt = cnt + 1
         loggerLanding.log('Launching game (Instance: ${cnt})..')
         const mcVersion = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getMinecraftVersion()
+        fs.readFile(ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer().getId() + '/launcherinfos.json', 'utf8', (err, data) => {
+            if(!err){
+                if(JSON.parse(data).resetId != ConfigManager.getSelectedServer().getResetId()){
+                    fs.unlink(ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer().getId() + '/servers.dat', (err) => {})
+                }
+                fs.writeFile(JSON.stringify({
+                    resetId: ConfigManager.getSelectedServer().getResetId()
+                }), ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer().getId() + '/launcherinfos.json', (err) =>{})
+            }
+        })
+
         const jExe = ConfigManager.getJavaExecutable()
         if (jExe == null) {
             asyncSystemScan(mcVersion)
