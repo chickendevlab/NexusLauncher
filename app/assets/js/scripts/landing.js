@@ -89,20 +89,25 @@ function setLaunchEnabled(val) {
 let cnt = 0
 // Bind launch button
 document.getElementById('launch_button').addEventListener('click', function (e) {
-        
+
     if (cnt >= 1 && confirm('Es läuft bereits mindestens eine Instanz von Minecraft.\nMöchtest du trotzdem noch eine Weitere Starten?')) {
         cnt = cnt + 1
         loggerLanding.log('Launching game (Instance: ${cnt})..')
+        const server = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
         const mcVersion = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getMinecraftVersion()
-        fs.readFile(ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer().getId() + '/launcherinfos.json', 'utf8', (err, data) => {
-            if(!err){
-                if(JSON.parse(data).resetId != ConfigManager.getSelectedServer().getResetId()){
-                    fs.unlink(ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer().getId() + '/servers.dat', (err) => {})
+
+        fs.readFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), 'utf8', (err, data) => {
+            loggerLanding.log(err)
+            if (!err) {
+                loggerLanding.log(JSON.parse(data))
+                loggerLanding.log(server.getResetId())
+                if (JSON.parse(data).resetId != server.getResetId()) {
+                    fs.unlink(ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer() + '/servers.dat', (err) => { })
                 }
-                fs.writeFile(JSON.stringify({
-                    resetId: ConfigManager.getSelectedServer().getResetId()
-                }), ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer().getId() + '/launcherinfos.json', (err) =>{})
             }
+            fs.writeFile(JSON.stringify({
+                resetId: server.getResetId()
+            }), ConfigManager.getInstanceDirectory() + path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), (err) => { })
         })
 
         const jExe = ConfigManager.getJavaExecutable()
@@ -125,10 +130,30 @@ document.getElementById('launch_button').addEventListener('click', function (e) 
             })
         }
     }
-    if(cnt === 0){
+    if (cnt === 0) {
         cnt = cnt + 1
         loggerLanding.log('Launching game.. (Instance: ${cnt})')
+        const server = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
         const mcVersion = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getMinecraftVersion()
+
+
+        fs.readFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), 'utf8', (err, data) => {
+            loggerLanding.log(err)
+            if (!err) {
+                loggerLanding.log(JSON.parse(data))
+                loggerLanding.log(server.getResetId())
+                if (JSON.parse(data).resetId != server.getResetId()) {
+                    fs.unlink(ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer() + '/servers.dat', (err) => { })
+                }
+            }
+
+        })
+
+
+        fs.writeFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), JSON.stringify({
+            resetId: server.getResetId()
+        }), (err) => { loggerLanding.log(err) })
+
         const jExe = ConfigManager.getJavaExecutable()
         if (jExe == null) {
             asyncSystemScan(mcVersion)
@@ -215,9 +240,9 @@ const refreshMojangStatuses = async function () {
 
         for (let i = 0; i < statuses.length; i++) {
             const service = statuses[i]
-            
+
             // Mojang API is broken for these two. https://bugs.mojang.com/browse/WEB-2303
-            if(service.service === 'sessionserver.mojang.com' || service.service === 'minecraft.net') {
+            if (service.service === 'sessionserver.mojang.com' || service.service === 'minecraft.net') {
                 service.status = 'green'
             }
 
