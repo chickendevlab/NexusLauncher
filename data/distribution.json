@@ -65,7 +65,6 @@
                     "type": "File",
                     "artifact": {
                         "size": 14117,
-                        "MD5": "8c901cac4eeb4a6bfbed34aa0575eb43",
                         "path": "servers.dat",
                         "url": "https://ChickenDevLab.github.io/NexusLauncher/data/lists/main/servers.dat" 
                     }
@@ -117,7 +116,6 @@
                     "type": "File",
                     "artifact": {
                         "size": 67,
-                        "MD5": "7f9468bbf0abe09bcbec73050d95cb86",
                         "path": "servers.dat",
                         "url": "https://ChickenDevLab.github.io/NexusLauncher/data/lists/beta/servers.dat" 
                     }

@@ -92,23 +92,27 @@ document.getElementById('launch_button').addEventListener('click', function (e) 
 
     if (cnt >= 1 && confirm('Es läuft bereits mindestens eine Instanz von Minecraft.\nMöchtest du trotzdem noch eine Weitere Starten?')) {
         cnt = cnt + 1
-        loggerLanding.log('Launching game (Instance: ${cnt})..')
+        loggerLanding.log('Launching game.. (Instance: ' + cnt + ')')
         const server = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
         const mcVersion = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getMinecraftVersion()
+        let bool = true
 
         fs.readFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), 'utf8', (err, data) => {
-            loggerLanding.log(err)
             if (!err) {
-                loggerLanding.log(JSON.parse(data))
-                loggerLanding.log(server.getResetId())
                 if (JSON.parse(data).resetId != server.getResetId()) {
                     fs.unlink(ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer() + '/servers.dat', (err) => { })
+                } else {
+                    bool = false
                 }
             }
-            fs.writeFile(JSON.stringify({
-                resetId: server.getResetId()
-            }), ConfigManager.getInstanceDirectory() + path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), (err) => { })
+
         })
+
+        if (bool) {
+            fs.writeFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), JSON.stringify({
+                resetId: server.getResetId()
+            }), (err) => { loggerLanding.log(err) })
+        }
 
         const jExe = ConfigManager.getJavaExecutable()
         if (jExe == null) {
@@ -132,27 +136,27 @@ document.getElementById('launch_button').addEventListener('click', function (e) 
     }
     if (cnt === 0) {
         cnt = cnt + 1
-        loggerLanding.log('Launching game.. (Instance: ${cnt})')
+        loggerLanding.log('Launching game.. (Instance: ' + cnt + ')')
         const server = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
         const mcVersion = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getMinecraftVersion()
-
+        let bool = true
 
         fs.readFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), 'utf8', (err, data) => {
-            loggerLanding.log(err)
             if (!err) {
-                loggerLanding.log(JSON.parse(data))
-                loggerLanding.log(server.getResetId())
                 if (JSON.parse(data).resetId != server.getResetId()) {
                     fs.unlink(ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer() + '/servers.dat', (err) => { })
+                } else {
+                    bool = false
                 }
             }
 
         })
 
-
-        fs.writeFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), JSON.stringify({
-            resetId: server.getResetId()
-        }), (err) => { loggerLanding.log(err) })
+        if (bool) {
+            fs.writeFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), JSON.stringify({
+                resetId: server.getResetId()
+            }), (err) => { loggerLanding.log(err) })
+        }
 
         const jExe = ConfigManager.getJavaExecutable()
         if (jExe == null) {
