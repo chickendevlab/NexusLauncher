@@ -89,50 +89,57 @@ function setLaunchEnabled(val) {
 let cnt = 0
 // Bind launch button
 document.getElementById('launch_button').addEventListener('click', function (e) {
+    if (cnt >= 1) {
+        setOverlayContent('Warnung', (cnt === 1 ? 'Es läuft bereits eine Minecraftinstanz!' : 'Es laufen bereits ' + cnt + ' Instanzen') + '<br> Durch mehrere Instanzen können Fehler aufkommen. Möchtest du trotzdem eine weitere starten?', 'Ja!', 'Nein!')
+        setOverlayHandler(() => {
+            toggleOverlay(false, true)
+            cnt = cnt + 1
+            loggerLanding.log('Launching game.. (Instance: ' + cnt + ')')
+            const server = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
+            const mcVersion = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getMinecraftVersion()
+            let bool = true
 
-    if (cnt >= 1 && confirm('Es läuft bereits mindestens eine Instanz von Minecraft.\nMöchtest du trotzdem noch eine Weitere Starten?')) {
-        cnt = cnt + 1
-        loggerLanding.log('Launching game.. (Instance: ' + cnt + ')')
-        const server = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
-        const mcVersion = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getMinecraftVersion()
-        let bool = true
-
-        fs.readFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), 'utf8', (err, data) => {
-            if (!err) {
-                if (JSON.parse(data).resetId != server.getResetId()) {
-                    fs.unlink(ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer() + '/servers.dat', (err) => { })
-                } else {
-                    bool = false
+            fs.readFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), 'utf8', (err, data) => {
+                if (!err) {
+                    if (JSON.parse(data).resetId != server.getResetId()) {
+                        fs.unlink(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/servers.dat'), (err) => { })
+                    } else {
+                        bool = false
+                    }
                 }
-            }
-
-        })
-
-        if (bool) {
-            fs.writeFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), JSON.stringify({
-                resetId: server.getResetId()
-            }), (err) => { loggerLanding.log(err) })
-        }
-
-        const jExe = ConfigManager.getJavaExecutable()
-        if (jExe == null) {
-            asyncSystemScan(mcVersion)
-        } else {
-
-            setLaunchDetails(Lang.queryJS('landing.launch.pleaseWait'))
-            toggleLaunchArea(true)
-            setLaunchPercentage(0, 100)
-
-            const jg = new JavaGuard(mcVersion)
-            jg._validateJavaBinary(jExe).then((v) => {
-                loggerLanding.log('Java version meta', v)
-                if (v.valid) {
-                    dlAsync()
-                } else {
-                    asyncSystemScan(mcVersion)
+                if (bool) {
+                    fs.writeFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), JSON.stringify({
+                        resetId: server.getResetId()
+                    }), (err) => { })
                 }
+
             })
-        }
+
+
+            const jExe = ConfigManager.getJavaExecutable()
+            if (jExe == null) {
+                asyncSystemScan(mcVersion)
+            } else {
+
+                setLaunchDetails(Lang.queryJS('landing.launch.pleaseWait'))
+                toggleLaunchArea(true)
+                setLaunchPercentage(0, 100)
+
+                const jg = new JavaGuard(mcVersion)
+                jg._validateJavaBinary(jExe).then((v) => {
+                    loggerLanding.log('Java version meta', v)
+                    if (v.valid) {
+                        dlAsync()
+                    } else {
+                        asyncSystemScan(mcVersion)
+                    }
+                })
+            }
+        })
+        setDismissHandler(() => { 
+            toggleOverlay(false, true)
+        })
+        toggleOverlay(true, true)
     }
     if (cnt === 0) {
         cnt = cnt + 1
@@ -143,25 +150,19 @@ document.getElementById('launch_button').addEventListener('click', function (e) 
 
         fs.readFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), 'utf8', (err, data) => {
             if (!err) {
-                loggerLanding.log(err)
-                loggerLanding.log(JSON.parse(data))
-                loggerLanding.log(server.getResetId())
                 if (JSON.parse(data).resetId != server.getResetId()) {
-                    loggerLanding.log(true)
-                    fs.unlink(ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer() + '/servers.dat', (err) => { })
+                    fs.unlink(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/servers.dat'), (err) => { })
                 } else {
-                    loggerLanding.log(false)
                     bool = false
                 }
             }
+            if (bool) {
+                fs.writeFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), JSON.stringify({
+                    resetId: server.getResetId()
+                }), (err) => { })
+            }
 
         })
-
-        if (bool) {
-            fs.writeFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), JSON.stringify({
-                resetId: server.getResetId()
-            }), (err) => { loggerLanding.log(err) })
-        }
 
         const jExe = ConfigManager.getJavaExecutable()
         if (jExe == null) {

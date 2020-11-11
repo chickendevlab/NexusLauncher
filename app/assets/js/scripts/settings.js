@@ -904,11 +904,21 @@ document.getElementById('settingsSwitchServerButton').addEventListener('click', 
 })
 
 document.getElementById('resetBtn').addEventListener('click', (e) => {
-    if (confirm('Möchtest du wirklich alle Instanzen löschen?')) {
+    setOverlayContent('Achtung!', 'Möchtest du wirklich alle Spieldateien löschen?<br>Dies betrifft: <ul><li>Minecraft-Einstellungen</li><li>Serverlisten</li><li>Screenshots</li><li>Resourcepacks</li><li> ...</li></ul><br>Diese Dateien können nicht wiedererstellt werden!', 'Ja, alle Instanzdateien löschen!', 'Nein, lieber nicht!')
+    setOverlayHandler(() => {
+        toggleOverlay(false, false)
         rimraf(ConfigManager.getInstanceDirectory(), () => {
-            alert('Fertig!')
+            setOverlayContent('Fertig!', 'Alle Instanzdateien wurden gelöscht.', 'Okay.')
+            setOverlayHandler(() => {
+                toggleOverlay(false, false)
+            })
+            toggleOverlay(true, false)
         })
-    }
+    })
+    setDismissHandler(() => {
+        toggleOverlay(false, false)
+    })
+    toggleOverlay(true, true)
 })
 
 /**
