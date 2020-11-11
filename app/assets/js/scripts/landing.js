@@ -143,9 +143,14 @@ document.getElementById('launch_button').addEventListener('click', function (e) 
 
         fs.readFile(path.join(ConfigManager.getInstanceDirectory(), ConfigManager.getSelectedServer() + '/launcherinfos.json'), 'utf8', (err, data) => {
             if (!err) {
+                loggerLanding.log(err)
+                loggerLanding.log(JSON.parse(data))
+                loggerLanding.log(server.getResetId())
                 if (JSON.parse(data).resetId != server.getResetId()) {
+                    loggerLanding.log(true)
                     fs.unlink(ConfigManager.getInstanceDirectory() + ConfigManager.getSelectedServer() + '/servers.dat', (err) => { })
                 } else {
+                    loggerLanding.log(false)
                     bool = false
                 }
             }
@@ -400,7 +405,7 @@ function asyncSystemScan(mcVersion, launchAfter = true) {
                 // Show this information to the user.
                 setOverlayContent(
                     'No Compatible<br>Java Installation Found',
-                    'In order to join WesterosCraft, you need a 64-bit installation of Java 8. Would you like us to install a copy? By installing, you accept <a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html">Oracle\'s license agreement</a>.',
+                    'In order to join Mc-Nexus.de, you need a 64-bit installation of Java 8. Would you like us to install a copy? By installing, you accept <a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html">Oracle\'s license agreement</a>.',
                     'Install Java',
                     'Install Manually'
                 )

@@ -29,7 +29,7 @@
             "optifineVersion": "1.15.2_HD_U_G1_pre30",
             "launchWrapperVersion": "2.1",
             "resourcepack": "https://mc-nexus.de/NexusLauncher/data/resourcepack.json",
-            "resetId": "0",
+            "resetId": "1",
             "modules": [
                 {
                     "id": "optifine:Optifine:1.15.2_HD_U_G1_pre30",
