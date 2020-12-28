@@ -3834,3 +3834,12 @@ input:checked + .toggleDisabledSwitchSlider:before {
 .rotating {
     animation: rotating 10s linear infinite;
 }
+
+#skin-manager {
+    border: solid black 1px;
+    width: 90%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.503);
+    overflow: hidden;
+
+}
