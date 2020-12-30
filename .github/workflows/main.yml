@@ -1,4 +1,6 @@
 name: Deploy CI
+env:
+  GH_TOKEN: {{ secrets.TOKEN }}
 on:
   push:
   workflow_dispatch:
@@ -25,5 +27,7 @@ jobs:
       CSC_IDENTITY_AUTO_DISCOVERY: false
     steps:
       - uses: actions/checkout@v2
-      - name: Build Installers for Mac
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build Installer for Mac
         run: npm run cidarwin
