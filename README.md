@@ -1,11 +1,21 @@
-<p align="center"><img src="./app/assets/images/SealCircle.png" width="150px" height="150px" alt="aventium softworks"></p>
+<p align="center"><img src="./app/assets/images/SealCircle.png" width="150px" height="150px" alt="MC-Nexus.de"></p>
 
-<h1 align="center">Helios Launcher</h1>
+<h1 align="center">MC-Nexus Launcher</h1>
 
-<em><h5 align="center">(formerly Electron Launcher)</h5></em>
+<em><h5 align="center">(fork of [Helios Launcher](https://github.com/dscalzi/HeliosLauncher))</h5></em>
 
-[<p align="center"><img src="https://img.shields.io/travis/dscalzi/HeliosLauncher.svg?style=for-the-badge" alt="travis">](https://travis-ci.org/dscalzi/HeliosLauncher) [<img src="https://img.shields.io/github/downloads/dscalzi/HeliosLauncher/total.svg?style=for-the-badge" alt="downloads">](https://github.com/ChickenDevLab/NexusLauncher/releases) <img src="https://forthebadge.com/images/badges/winter-is-coming.svg"  height="28px" alt="stark"></p>
+[<p align="center"><img src="https://img.shields.io/travis/ChickenDevLab/NexusLauncher.svg?style=for-the-badge" alt="travis">](https://travis-ci.org/ChickenDevLab/NexusLauncher) [<img src="https://img.shields.io/github/downloads/ChickenDevLab/NexusLauncher/total.svg?style=for-the-badge" alt="downloads">](https://github.com/ChickenDevLab/NexusLauncher/releases) <img src="https://forthebadge.com/images/badges/winter-is-coming.svg"  height="28px" alt="stark"></p>
 
+<p align="center">Join MC-Nexus.de without worrying about installing Java, Optifine, or Resources Packs. We'll handle that for you.</p>
+
+![Screenshot 1](https://i.imgur.com/6o7SmH6.png)
+![Screenshot 2](https://i.imgur.com/x3B34n1.png)
+> Screenshots of Helios Launcher
+
+---
+
+<details>
+<summary>Original README</summary>
 <p align="center">Join modded servers without worrying about installing Java, Forge, or other mods. We'll handle that for you.</p>
 
 ![Screenshot 1](https://i.imgur.com/6o7SmH6.png)
@@ -214,3 +224,4 @@ The best way to contact the developers is on Discord.
 [wiki]: https://github.com/ChickenDevLab/NexusLauncher/wiki 'wiki'
 [nebula]: https://github.com/dscalzi/Nebula 'dscalzi/Nebula'
 [v2branch]: https://github.com/ChickenDevLab/NexusLauncher/tree/ts-refactor 'v2 branch'
+</details>
