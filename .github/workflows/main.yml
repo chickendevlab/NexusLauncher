@@ -1,4 +1,6 @@
 name: Deploy CI
+env:
+  GH_TOKEN: ${{ secrets.TOKEN }}
 on:
   push:
   workflow_dispatch:
@@ -7,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: true
-      GH_TOKEN: {{ secrets.TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Build Installers for Windows & Linux
@@ -24,7 +25,6 @@ jobs:
     env:
       ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: true
       CSC_IDENTITY_AUTO_DISCOVERY: false
-      GH_TOKEN: {{ secrets.TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Install Dependencies
