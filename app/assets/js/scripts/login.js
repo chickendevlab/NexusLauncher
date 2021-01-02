@@ -20,6 +20,8 @@ const loginRememberOption   = document.getElementById('loginRememberOption')
 const loginButton           = document.getElementById('loginButton')
 const loginForm             = document.getElementById('loginForm')
 
+const { microsoft } = require('./assets/js/microsoft')
+
 // Control variables.
 let lu = false, lp = false
 
@@ -299,4 +301,25 @@ loginButton.addEventListener('click', () => {
         loggerLogin.log('Error while logging in.', err)
     })
 
+})
+
+const microsoftBtn = document.getElementById('microsoftlogin')
+microsoftBtn.addEventListener('click', (event) => {
+    console.log('click')
+    //microsoftBtn.disabled = true
+    const ws = new WebSocket('ws://localhost:80/flow')
+    ws.onmessage = function (msg){
+        const data = JSON.parse(msg.data)
+        console.log(data.code)
+        if(data.code === 'waitforstate'){
+            ws.send(JSON.stringify({
+                code: 'state',
+                state: 'hi'
+            }))
+        }
+    }
+
+    ws.onclose = function (event) {
+
+    }
 })

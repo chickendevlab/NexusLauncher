@@ -613,8 +613,7 @@ body, button {
     font-weight: bold;
     letter-spacing: 2px;
     border: none;
-    padding: 15px 5px;
-    margin: 10px 0px;
+    margin: 15px 0px;
     cursor: pointer;
     position: relative;
     right: -20px;
@@ -3833,4 +3832,26 @@ input:checked + .toggleDisabledSwitchSlider:before {
 /* Class which is applied when the spinner image is spinning. */
 .rotating {
     animation: rotating 10s linear infinite;
+}
+
+#microsoftlogin {
+    background: none;
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+#microsoftlogin:disabled {
+    color: rgba(255, 255, 255, 0.75);
+    pointer-events: none;
+}
+
+#microsoftlogin:hover,
+#microsoftlogin:focus {
+    text-shadow: 0px 0px 20px #fff;
+    outline: none;
+}
+#microsoftlogin:active {
+    color: #c7c7c7;
+    text-shadow:  0px 0px 20px #c7c7c7;
 }

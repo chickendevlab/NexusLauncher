@@ -19,7 +19,8 @@
     "dist:win": "npm run dist -- WINDOWS",
     "dist:mac": "npm run dist -- MAC",
     "dist:linux": "npm run dist -- LINUX",
-    "lint": "eslint --config .eslintrc.json ."
+    "lint": "eslint --config .eslintrc.json .",
+    "test": "node ./app/assets/js/scripts/test.js"
   },
   "engines": {
     "node": "12.x.x"
