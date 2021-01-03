@@ -3836,7 +3836,7 @@ input:checked + .toggleDisabledSwitchSlider:before {
 
 #microsoftlogin {
     background: none;
-    border: none;
+    border: solid 1px white;
     margin-top: 5px;
     margin-bottom: 10px;
     font-size: 20px;

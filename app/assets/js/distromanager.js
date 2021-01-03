@@ -503,6 +503,10 @@ class DistroIndex {
         return this.servers
     }
 
+    getAuthServer(){
+        return this.authServer
+    }
+
 
 
     /**

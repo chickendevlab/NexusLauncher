@@ -306,20 +306,39 @@ loginButton.addEventListener('click', () => {
 const microsoftBtn = document.getElementById('microsoftlogin')
 microsoftBtn.addEventListener('click', (event) => {
     console.log('click')
+    console.log(microsoft.refesh('halldadasda'))
     //microsoftBtn.disabled = true
-    const ws = new WebSocket('ws://localhost:80/flow')
+    /* const ws = new WebSocket('ws://localhost:80/flow')
     ws.onmessage = function (msg){
         const data = JSON.parse(msg.data)
-        console.log(data.code)
-        if(data.code === 'waitforstate'){
-            ws.send(JSON.stringify({
-                code: 'state',
-                state: 'hi'
-            }))
+        console.log(data)
+        switch(data.code){
+            case 'waitforstate': 
+                ws.send(JSON.stringify({
+                    code: 'state',
+                    state: microsoft.state
+                }))
+                break
+            case 'stateaccept':
+                microsoft.openAuthWindow(microsoft.state)
+                break
+            case 'statedeny':
+                microsoft.newState()
+                ws.send(JSON.stringify({
+                    code: 'state',
+                    state: microsoft.state
+                }))
+                break
+            case 'final':
+                ws.close()
+                microsoft.tryToLogin(data.response)
+
         }
-    }
+    
+    } */
 
     ws.onclose = function (event) {
 
     }
 })
+
