@@ -20,6 +20,7 @@ const loginRememberOption   = document.getElementById('loginRememberOption')
 const loginButton           = document.getElementById('loginButton')
 const loginForm             = document.getElementById('loginForm')
 
+const { getDistribution } = require('./assets/js/distromanager')
 const { microsoft } = require('./assets/js/microsoft')
 
 // Control variables.
@@ -306,9 +307,8 @@ loginButton.addEventListener('click', () => {
 const microsoftBtn = document.getElementById('microsoftlogin')
 microsoftBtn.addEventListener('click', (event) => {
     console.log('click')
-    console.log(microsoft.refesh('halldadasda'))
     //microsoftBtn.disabled = true
-    /* const ws = new WebSocket('ws://localhost:80/flow')
+    const ws = new WebSocket('ws://' + getDistribution().getAuthServer() + '/flow')
     ws.onmessage = function (msg){
         const data = JSON.parse(msg.data)
         console.log(data)
@@ -330,12 +330,13 @@ microsoftBtn.addEventListener('click', (event) => {
                 }))
                 break
             case 'final':
+                microsoft.closeAuthWindow()
                 ws.close()
                 microsoft.tryToLogin(data.response)
 
         }
     
-    } */
+    } 
 
     ws.onclose = function (event) {
 
