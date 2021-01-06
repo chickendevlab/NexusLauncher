@@ -9,7 +9,7 @@
         "oracle": "http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html"
     },
     "rss": "https://forum.mc-nexus.de/index.php?board-feed/",
-    "authServer": "http://nexusauth.herokuapp.com/",
+    "authServer": "nexusauth.herokuapp.com",
     "servers": [
         {
             "id": "main",
