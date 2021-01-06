@@ -15,6 +15,8 @@ const Mojang        = require('./mojang')
 const logger        = LoggerUtil('%c[AuthManager]', 'color: #a02d2a; font-weight: bold')
 const loggerSuccess = LoggerUtil('%c[AuthManager]', 'color: #209b07; font-weight: bold')
 
+const Microsoft     = require('./microsoft')
+
 // Functions
 
 /**
@@ -43,6 +45,10 @@ exports.addAccount = async function(username, password){
     } catch (err){
         return Promise.reject(err)
     }
+}
+
+exports.addMicrosoftAccount  = async function(token){
+    
 }
 
 /**

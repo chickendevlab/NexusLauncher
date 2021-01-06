@@ -332,7 +332,7 @@ microsoftBtn.addEventListener('click', (event) => {
             case 'final':
                 microsoft.closeAuthWindow()
                 ws.close()
-                microsoft.tryToLogin(data.response)
+                microsoft.tryToLogin(data.response).then(content => console.log(content)).catch(err => console.log(err))
 
         }
     
