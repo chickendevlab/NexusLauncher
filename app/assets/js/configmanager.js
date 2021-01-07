@@ -330,6 +330,13 @@ exports.updateAuthAccount = function(uuid, accessToken){
     return config.authenticationDatabase[uuid]
 }
 
+exports.updateAuthAccount = function(uuid, mcAccessToken, msAccessToken, msRefreshToken){
+    config.authenticationDatabase[uuid].accessToken = mcAccessToken
+    config.authenticationDatabase[uuid].microsoft.access_token = msAccessToken
+    config.authenticationDatabase[uuid].microsoft.refresh_token = msRefreshToken
+    return config.authenticationDatabase[uuid]
+}
+
 /**
  * Adds an authenticated account to the database to be stored.
  * 
@@ -349,6 +356,23 @@ exports.addAuthAccount = function(uuid, accessToken, username, displayName){
         displayName: displayName.trim()
     }
     return config.authenticationDatabase[uuid]
+}
+
+exports.addMsAuthAccount = function(data){
+    config.selectedAccount = data.profile.id
+    config.authenticationDatabase[data.profile.id] = {
+        accessToken: data.mcAccessToken,
+        username: 'Microsoft-Account',
+        uuid: data.profile.id.trim(),
+        displayName: data.profile.name,
+        microsoft: {
+            access_token: data.microsoft.access_token,
+            refresh_token: data.microsoft.refresh_token
+        }
+        
+    }
+
+    return config.authenticationDatabase[data.profile.id]
 }
 
 /**

@@ -331,7 +331,7 @@ async function validateSelectedAccount(){
                 'Anderen Account w&auml;hlen'
             )
             setOverlayHandler(() => {
-                document.getElementById('loginUsername').value = selectedAcc.username
+                document.getElementById('loginUsername').value = selectedAcc.microsoft ? '' : selectedAcc.username
                 validateEmail(selectedAcc.username)
                 loginViewOnSuccess = getCurrentView()
                 loginViewOnCancel = getCurrentView()
