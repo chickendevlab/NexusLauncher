@@ -309,6 +309,7 @@ microsoftBtn.addEventListener('click', (event) => {
     microsoftBtn.disabled = true
     formDisabled(true)
     const ws = new WebSocket('ws://' + getDistribution().getAuthServer() + '/flow')
+    let authWindow
     ws.onmessage = function (msg) {
         const data = JSON.parse(msg.data)
         switch (data.code) {
@@ -319,7 +320,10 @@ microsoftBtn.addEventListener('click', (event) => {
                 }))
                 break
             case 'stateaccept':
-                microsoft.openAuthWindow(microsoft.state)
+                authWindow = microsoft.openAuthWindow(microsoft.state)
+                authWindow.once('close', () => {
+                    microsoftBtn.disabled = false
+                })
                 break
             case 'statedeny':
                 microsoft.newState()
@@ -327,6 +331,17 @@ microsoftBtn.addEventListener('click', (event) => {
                     code: 'state',
                     state: microsoft.getState()
                 }))
+                break
+            case 'authdeny':
+                if (authWindow) {
+                    authWindow.close()
+                    microsoftBtn.disabled = false
+                }
+                setOverlayContent('Fehler beim Anmelden mit Microsoft', 'Du musst dem Launcher die benötigten Rechte geben, damit dieser Minecraft starten kann!', 'Zurück zum Login')
+                setOverlayHandler(() => {
+                    toggleOverlay(false, false)
+                })
+                toggleOverlay(true, false)
                 break
             case 'final':
                 microsoft.closeAuthWindow()
@@ -359,7 +374,7 @@ microsoftBtn.addEventListener('click', (event) => {
                     microsoftBtn.disabled = false
                     formDisabled(false)
                 })
-                //microsoft.tryToLogin(data.response).then(content => console.log(content)).catch(err => console.log(err))
+            //microsoft.tryToLogin(data.response).then(content => console.log(content)).catch(err => console.log(err))
 
         }
 

@@ -2,6 +2,8 @@ const BrowserWindow = require('electron').remote.BrowserWindow
 const randomString = require('crypto-random-string')
 const request = require('request')
 
+const path = require('path')
+
 const { getDistribution } = require('./distromanager')
 
 
@@ -9,7 +11,27 @@ const { getDistribution } = require('./distromanager')
 let state = randomString({ length: 32, type: 'url-safe' })
 const authWindowConfig = {
     title: 'Microsoft-Login',
-    backgroundColor: '#222222'
+    backgroundColor: '#222222',
+    width: 520,
+    height: 600,
+    frame: false,
+    icon: getPlatformIcon('SealCircle')
+}
+
+function getPlatformIcon(filename){
+    let ext
+    switch(process.platform) {
+        case 'win32':
+            ext = 'ico'
+            break
+        case 'darwin':
+        case 'linux':
+        default:
+            ext = 'png'
+            break
+    }
+
+    return path.join(__dirname, '..', 'images', `${filename}.${ext}`)
 }
 
 let authWindow
@@ -26,12 +48,12 @@ exports.openAuthWindow = function (state) {
         authWindow = null
     }
     authWindow = new BrowserWindow(authWindowConfig)
-    authWindow.loadURL('https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize?client_id=3530b541-1564-4c3d-bb2f-407c1b0e0e5d&response_type=code&redirect_uri=https%3A%2F%2Fnexusauth.herokuapp.com%2Fredirect&scope=XboxLive.signin%20offline_access&state=' + getState())
+    authWindow.loadURL('https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize?prompt=consent&client_id=3530b541-1564-4c3d-bb2f-407c1b0e0e5d&response_type=code&redirect_uri=https%3A%2F%2Fnexusauth.herokuapp.com%2Fredirect&scope=XboxLive.signin%20offline_access&state=' + getState())
     authWindow.setMenu(null)
     authWindow.once('ready-to-show', () => {
         authWindow.show()
     })
-    return
+    return authWindow
 }
 
 exports.closeAuthWindow = function () {
