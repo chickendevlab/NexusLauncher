@@ -1381,36 +1381,10 @@ class AssetGuard extends EventEmitter {
         return new Promise(async (resolve, reject) => {
             await self.validateClient(versionData)
             await self.validateLogConfig(versionData)
-            await self.fetchResourcePack(server)
             resolve()
         })
     }
 
-    fetchResourcePack(server){
-        const self = this
-        
-        return new Promise((resolve, reject) => {
-            if(!server.getResourcePackInfoFile()){
-                resolve()
-            }
-            fetch(server.getResourcePackInfoFile())
-                .catch(err => console.log('Could not fetch Resourcepack', err))
-                .then(res => res.json())
-                .then(function(json){
-                    
-                    // const json = content.resourcepack
-                    let asset = new Asset(json.id, json.md5, json.size, json.url, path.join(ConfigManager.getInstanceDirectory(), server.getID(), json.path))
-                    if(!AssetGuard._validateLocal(asset.to, 'md5', asset.hash)){
-                        self.files.dlqueue.push(asset)
-                        self.files.dlsize += asset.size*1
-                        resolve()
-                    } else {
-                        resolve()
-                    }
-                })
-            
-        })
-    }
 
     /**
      * Validate client file - artifact renamed from client.jar to '{version}'.jar.

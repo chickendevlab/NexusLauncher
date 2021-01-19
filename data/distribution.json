@@ -28,7 +28,6 @@
             "autoconnect": true,
             "optifineVersion": "1.15.2_HD_U_G1_pre30",
             "launchWrapperVersion": "2.1",
-            "resourcepack": "https://mc-nexus.de/NexusLauncher/data/resourcepack.json",
             "resetId": "0",
             "modules": [
                 {
@@ -57,7 +56,7 @@
                     "artifact": {
                         "size": 2841,
                         "path": "options.txt",
-                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/main/options.txt" 
+                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/main/options.txt"
                     }
                 },
                 {
@@ -66,9 +65,19 @@
                     "artifact": {
                         "size": 14117,
                         "path": "servers.dat",
-                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/lists/main/servers.dat" 
+                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/lists/main/servers.dat"
                     }
-                }                
+                },
+                {
+                    "id": "resourcepack.zip",
+                    "type": "File",
+                    "artifact": {
+                        "size": 182130630,
+                        "path": "resourcepacks/NexusPack.zip",
+                        "url": "https://mc-nexus.de/downloads/NexusPack.zip",
+                        "MD5": "9e59e1fbb9abe240a3357f7495f86e3c"
+                    }
+                }
             ]
         },
         {
@@ -117,7 +126,7 @@
                     "artifact": {
                         "size": 67,
                         "path": "servers.dat",
-                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/lists/beta/servers.dat" 
+                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/lists/beta/servers.dat"
                     }
                 },
                 {
@@ -126,9 +135,9 @@
                     "artifact": {
                         "size": 2916,
                         "path": "options.txt",
-                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/beta/options.txt" 
+                        "url": "https://ChickenDevLab.github.io/NexusLauncher/data/files/beta/options.txt"
                     }
-                }               
+                }
             ]
         }
     ]

@@ -613,8 +613,7 @@ body, button {
     font-weight: bold;
     letter-spacing: 2px;
     border: none;
-    padding: 15px 5px;
-    margin: 10px 0px;
+    margin: 15px 0px;
     cursor: pointer;
     position: relative;
     right: -20px;
@@ -859,18 +858,27 @@ body, button {
     transform: rotate(45deg);
 }
 
-/*
-#login_filter {
-    height: calc(100% - 22px);
-    width: 100%;
-    z-index: 9000;
-    position: absolute;
-    filter: blur(8px) contrast(0.9) brightness(1.0);
-    background: url('./../images/backgrounds/0.jpg') no-repeat center center fixed;
-    transform: scale(1.2);
-    background-size: cover;
+#loginMSButton {
+    background: none;
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 20px;
 }
-*/
+#loginMSButton:disabled {
+    color: rgba(255, 255, 255, 0.75);
+    pointer-events: none;
+}
+
+#loginMSButton:hover,
+#loginMSButton:focus {
+    text-shadow: 0px 0px 20px #fff;
+    outline: none;
+}
+#loginMSButton:active {
+    color: #c7c7c7;
+    text-shadow:  0px 0px 20px #c7c7c7;
+} 
 
 /*******************************************************************************
  *                                                                             *
