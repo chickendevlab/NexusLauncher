@@ -19,9 +19,13 @@ const checkmarkContainer = document.getElementById('checkmarkContainer')
 const loginRememberOption = document.getElementById('loginRememberOption')
 const loginButton = document.getElementById('loginButton')
 const loginForm = document.getElementById('loginForm')
+<<<<<<< HEAD
 
 const { getDistribution } = require('./assets/js/distromanager')
 const microsoft = require('./assets/js/microsoft')
+=======
+const loginMSButton = document.getElementById('loginMSButton')
+>>>>>>> ms-auth2
 
 // Control variables.
 let lu = false, lp = false
@@ -300,6 +304,81 @@ loginButton.addEventListener('click', () => {
         })
         toggleOverlay(true)
         loggerLogin.log('Error while logging in.', err)
+    })
+})
+
+loginMSButton.addEventListener('click', (event) => {
+    loginMSButton.disabled = true
+    ipcRenderer.send('openMSALoginWindow', 'open')
+})
+
+ipcRenderer.on('MSALoginWindowReply', (event, ...args) => {
+    if (args[0] === 'error') {
+        setOverlayContent('FEHLER!', 'Es ist bereits ein Login-Fenster offen!', 'OK')
+        setOverlayHandler(() => {
+            toggleOverlay(false)
+        })
+        toggleOverlay(true)
+        return
+    }
+
+    const queryMap = args[0]
+    if (queryMap.has('error')) {
+        let error = queryMap.get('error')
+        let errorDesc = queryMap.get('error_description')
+        if(error === 'access_denied'){
+            error = 'FEHLER'
+            errorDesc = 'Um den NexusLauncher nutzen zu können, musst du uns den benötigten Berechtigungen zustimmen! Sonst kannst du diesen Launcher nicht mit Microsoft-Accounts nutzen.<br><br>Trotz dem Zustimmen der Berechtigungen gibst du uns keine Möglichkeit, irgendetwas mit deinem Account anzustellen, weil alle Daten immer SOFORT und OHNE UMWEGE an dich (den Launcher) zurück gesendet werden.'
+        }        
+        setOverlayContent(error, errorDesc, 'OK')
+        setOverlayHandler(() => {
+            loginMSButton.disabled = false
+            toggleOverlay(false)
+        })
+        toggleOverlay(true)
+        return
+    }
+
+    // Disable form.
+    formDisabled(true)
+
+    // Show loading stuff.
+    loginLoading(true)
+
+    const authCode = queryMap.get('code')
+    AuthManager.addMSAccount(authCode).then(account => {
+        updateSelectedAccount(account)
+        loginButton.innerHTML = loginButton.innerHTML.replace(Lang.queryJS('login.loggingIn'), Lang.queryJS('login.success'))
+        $('.circle-loader').toggleClass('load-complete')
+        $('.checkmark').toggle()
+        setTimeout(() => {
+            switchView(VIEWS.login, loginViewOnSuccess, 500, 500, () => {
+                // Temporary workaround
+                if (loginViewOnSuccess === VIEWS.settings) {
+                    prepareSettings()
+                }
+                loginViewOnSuccess = VIEWS.landing // Reset this for good measure.
+                loginCancelEnabled(false) // Reset this for good measure.
+                loginViewCancelHandler = null // Reset this for good measure.
+                loginUsername.value = ''
+                loginPassword.value = ''
+                $('.circle-loader').toggleClass('load-complete')
+                $('.checkmark').toggle()
+                loginLoading(false)
+                loginButton.innerHTML = loginButton.innerHTML.replace(Lang.queryJS('login.success'), Lang.queryJS('login.login'))
+                formDisabled(false)
+            })
+        }, 1000)
+    }).catch(error => {
+        loginMSButton.disabled = false
+        loginLoading(false)
+        setOverlayContent('FEHLER!', error.message ? error.message : 'Beim Anmelden mit Microsoft ist ein Fehler aufgetreten! Für detailiertere Informationen schaue bitte im Log nach. Diese öffnest du mit STRG + SHIFT + I', Lang.queryJS('login.tryAgain'))
+        setOverlayHandler(() => {
+            formDisabled(false)
+            toggleOverlay(false)
+        })
+        toggleOverlay(true)
+        loggerLogin.error(error)
     })
 
 })

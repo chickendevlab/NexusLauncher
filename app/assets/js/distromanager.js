@@ -422,9 +422,6 @@ class Server {
      * @returns {Array.<Module>} An array of modules for this server.
      */
 
-    getResourcePackInfoFile() {
-        return this.resourcepack
-    }
 
     getResetId(){
         return this.resetId
