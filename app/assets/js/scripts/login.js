@@ -19,13 +19,8 @@ const checkmarkContainer = document.getElementById('checkmarkContainer')
 const loginRememberOption = document.getElementById('loginRememberOption')
 const loginButton = document.getElementById('loginButton')
 const loginForm = document.getElementById('loginForm')
-<<<<<<< HEAD
-
-const { getDistribution } = require('./assets/js/distromanager')
-const microsoft = require('./assets/js/microsoft')
-=======
 const loginMSButton = document.getElementById('loginMSButton')
->>>>>>> ms-auth2
+
 
 // Control variables.
 let lu = false, lp = false
@@ -382,85 +377,3 @@ ipcRenderer.on('MSALoginWindowReply', (event, ...args) => {
     })
 
 })
-
-const microsoftBtn = document.getElementById('microsoftlogin')
-microsoftBtn.addEventListener('click', (event) => {
-    microsoftBtn.disabled = true
-    formDisabled(true)
-    const ws = new WebSocket('ws://' + getDistribution().getAuthServer() + '/flow')
-    let authWindow
-    ws.onmessage = function (msg) {
-        const data = JSON.parse(msg.data)
-        switch (data.code) {
-            case 'waitforstate':
-                ws.send(JSON.stringify({
-                    code: 'state',
-                    state: microsoft.getState()
-                }))
-                break
-            case 'stateaccept':
-                authWindow = microsoft.openAuthWindow(microsoft.state)
-                authWindow.once('close', () => {
-                    microsoftBtn.disabled = false
-                })
-                break
-            case 'statedeny':
-                microsoft.newState()
-                ws.send(JSON.stringify({
-                    code: 'state',
-                    state: microsoft.getState()
-                }))
-                break
-            case 'authdeny':
-                if (authWindow) {
-                    authWindow.close()
-                    microsoftBtn.disabled = false
-                }
-                setOverlayContent('Fehler beim Anmelden mit Microsoft', 'Du musst dem Launcher die benötigten Rechte geben, damit dieser Minecraft starten kann!', 'Zurück zum Login')
-                setOverlayHandler(() => {
-                    toggleOverlay(false, false)
-                })
-                toggleOverlay(true, false)
-                break
-            case 'final':
-                microsoft.closeAuthWindow()
-                ws.close()
-                AuthManager.addMicrosoftAccount(data.response).then(value => {
-                    updateSelectedAccount(value)
-                    setTimeout(() => {
-                        switchView(VIEWS.login, loginViewOnSuccess, 500, 500, () => {
-                            // Temporary workaround
-                            if (loginViewOnSuccess === VIEWS.settings) {
-                                prepareSettings()
-                            }
-                            loginViewOnSuccess = VIEWS.landing // Reset this for good measure.
-                            loginCancelEnabled(false) // Reset this for good measure.
-                            loginViewCancelHandler = null // Reset this for good measure.
-                            loginUsername.value = ''
-                            loginPassword.value = ''
-                            loginLoading(false)
-                            loginButton.innerHTML = loginButton.innerHTML.replace(Lang.queryJS('login.success'), Lang.queryJS('login.login'))
-                            formDisabled(false)
-                        })
-                    }, 1000)
-                }).catch(err => {
-                    loggerLogin.log('Error while attemt to login to microsoft: ', err)
-                    setOverlayContent('Fehler beim Anmelden mit Microsoft', err.error_details ? err.error_details : 'Für mehr Details schaue bitte in der Konsole nach. Diese kannst du mit STRG + SHIFT + I öffnen', 'Zurück zum Login')
-                    setOverlayHandler(() => {
-                        toggleOverlay(false, false)
-                    })
-                    toggleOverlay(true, false)
-                    microsoftBtn.disabled = false
-                    formDisabled(false)
-                })
-            //microsoft.tryToLogin(data.response).then(content => console.log(content)).catch(err => console.log(err))
-
-        }
-
-    }
-
-    ws.onclose = function (event) {
-
-    }
-})
-

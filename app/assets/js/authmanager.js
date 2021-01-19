@@ -12,13 +12,6 @@
 const ConfigManager = require('./configmanager')
 const LoggerUtil = require('./loggerutil')
 const Mojang = require('./mojang')
-<<<<<<< HEAD
-const logger = LoggerUtil('%c[AuthManager]', 'color: #a02d2a; font-weight: bold')
-const loggerSuccess = LoggerUtil('%c[AuthManager]', 'color: #209b07; font-weight: bold')
-
-const microsoft = require('./microsoft')
-
-=======
 const Microsoft = require('./microsoft')
 const { reject } = require('async')
 const logger = LoggerUtil('%c[AuthManager]', 'color: #a02d2a; font-weight: bold')
@@ -78,7 +71,6 @@ async function validateSelectedMicrosoft() {
 }
 
 // Exports
->>>>>>> ms-auth2
 // Functions
 
 /**
@@ -131,23 +123,10 @@ exports.addMicrosoftAccount = async function (tokens) {
 exports.removeAccount = async function (uuid) {
     try {
         const authAcc = ConfigManager.getAuthAccount(uuid)
-<<<<<<< HEAD
-        if (authAcc.microsoft) {
-            ConfigManager.removeAuthAccount(uuid)
-            ConfigManager.save()
-            return Promise.resolve()
-        } else {
-            await Mojang.invalidate(authAcc.accessToken, ConfigManager.getClientToken())
-            ConfigManager.removeAuthAccount(uuid)
-            ConfigManager.save()
-            return Promise.resolve()
-        }
-=======
         await Mojang.invalidate(authAcc.accessToken, ConfigManager.getClientToken())
         ConfigManager.removeAuthAccount(uuid)
         ConfigManager.save()
         return Promise.resolve()
->>>>>>> ms-auth2
     } catch (err) {
         return Promise.reject(err)
     }
@@ -164,51 +143,6 @@ exports.removeAccount = async function (uuid) {
  */
 exports.validateSelected = async function () {
     const current = ConfigManager.getSelectedAccount()
-<<<<<<< HEAD
-    if (!current.microsoft) {
-        const isValid = await Mojang.validate(current.accessToken, ConfigManager.getClientToken())
-        if (!isValid) {
-            try {
-                const session = await Mojang.refresh(current.accessToken, ConfigManager.getClientToken())
-                ConfigManager.updateAuthAccount(current.uuid, session.accessToken)
-                ConfigManager.save()
-            } catch (err) {
-                logger.debug('Error while validating selected profile:', err)
-                if (err && err.error === 'ForbiddenOperationException') {
-                    // What do we do?
-                }
-                logger.log('Account access token is invalid.')
-                return false
-            }
-            loggerSuccess.log('Account access token validated.')
-            return true
-        } else {
-            loggerSuccess.log('Account access token validated.')
-            return true
-        }
-    } else {
-        try {
-            const isValid = await microsoft.validate()
-            if (!isValid) {
-                const response = await microsoft.refresh(current.microsoft.refresh_token)
-                try{
-                    const profile = await microsoft.tryToLogin(response)
-                    ConfigManager.updateMsAuthAccount(profile.profile.id, profile.mcAccessToken, profile.microsoft.access_token, profile.microsoft.refresh_token)
-                    ConfigManager.save()
-                    logger.log('Microsoft tokens validated')
-                    return true
-                } catch(err){
-                    logger.log('Error while logging in with refreshed access token:', err)
-                    return false
-                }
-            }else{
-                logger.log('Microsoft tokens validated')
-                return true
-            }
-        } catch (err) {
-            logger.log('Error while logging in with refreshed access token:', err)
-            return false
-=======
     const isValid = await Mojang.validate(current.accessToken, ConfigManager.getClientToken())
     if (!isValid) {
         try {
@@ -221,7 +155,6 @@ exports.validateSelected = async function () {
             }
         } catch (error) {
             return Promise.reject(error)
->>>>>>> ms-auth2
         }
     }
 }
