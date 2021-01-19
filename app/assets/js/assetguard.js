@@ -15,7 +15,6 @@ const zlib          = require('zlib')
 const ConfigManager = require('./configmanager')
 const DistroManager = require('./distromanager')
 const isDev         = require('./isdev')
-const fetch = require('node-fetch')
 
 // Constants
 // const PLATFORM_MAP = {
