@@ -7,6 +7,7 @@ const isDev = require('./app/assets/js/isdev')
 const path = require('path')
 const semver = require('semver')
 const url = require('url')
+const notifier = require('node-notifier')
 
 const redirectUriPrefix = 'https://login.microsoftonline.com/common/oauth2/nativeclient?'
 
@@ -31,6 +32,17 @@ function initAutoUpdater(event, data) {
         event.sender.send('autoUpdateNotification', 'update-available', info)
     })
     autoUpdater.on('update-downloaded', (info) => {
+        notifier.notify({
+            title: 'Update verfügbar!',
+            message: 'Für den Nexus Launcher ist ein neues Update verfügbar! Klicke diese Nachricht an, um es zu installieren!',
+            icon: path.join(__dirname, 'app', 'assets', 'images', 'SealCircle.png'),
+            appID: 'Nexus Launcher',
+            sound: true
+        })
+
+        notifier.once('click', (event) => {
+            autoUpdater.quitAndInstall()
+        })
         event.sender.send('autoUpdateNotification', 'update-downloaded', info)
     })
     autoUpdater.on('update-not-available', (info) => {
