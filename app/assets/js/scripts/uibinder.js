@@ -61,7 +61,7 @@ function showMainUI(data){
 
     if(!isDev){
         loggerAutoUpdater.log('Initializing..')
-        ipcRenderer.send('autoUpdateAction', 'initAutoUpdater', ConfigManager.isInTestingMode())
+        ipcRenderer.send('autoUpdateAction', 'initAutoUpdater', ConfigManager.isInTestMode())
     }
 
     prepareSettings(true)
