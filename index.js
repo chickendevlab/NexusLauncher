@@ -36,7 +36,7 @@ function initAutoUpdater(event, data) {
             title: 'Update verfügbar!',
             message: 'Für den Nexus Launcher ist ein neues Update verfügbar! Klicke diese Nachricht an, um es zu installieren!',
             icon: path.join(__dirname, 'app', 'assets', 'images', 'SealCircle.png'),
-            appID: 'Nexus Launcher',
+            appID: 'MC-Nexus.de',
             sound: true
         })
 
