@@ -90,7 +90,6 @@ const DEFAULT_CONFIG = {
             launchDetached: true
         },
         launcher: {
-            allowPrerelease: false,
             dataDirectory: dataPath
         }
     },
@@ -104,7 +103,8 @@ const DEFAULT_CONFIG = {
     selectedAccount: null,
     authenticationDatabase: {},
     modConfigurations: [],
-    microsoftAuth: {}
+    microsoftAuth: {},
+    testMode: false
 }
 
 let config = null
@@ -222,6 +222,23 @@ exports.getNewsCache = function () {
     return config.newsCache
 }
 
+exports.isInTestMode = function () {
+    return config.testMode
+}
+
+exports.toggleTestMode = function (toggle) {
+    if (toggle) {
+        logger.warn('Achtung!')
+        logger.warn('Du erhälst jetzt DevBuilds als Updates und nutzt eine Distribution, welche noch in der Testphase ist! Wenn du nicht ganz sicher weißt, was du gerade gemacht hast, dann mache es wieder rückgängig mit ConfigManager.toggleTestMode(false) !')
+        config.testMode = true
+    } else {
+        logger.info('Du hast den Testmode deaktiviert!')
+        logger.info('Du erhälst nun keine DevBuilds mehr und nutzt die reguläre Distribution')
+        config.testMode = false
+    }
+    exports.save()
+}
+
 /**
  * Set the new news cache object.
  * 
@@ -331,7 +348,7 @@ exports.updateAuthAccount = function (uuid, accessToken) {
     return config.authenticationDatabase[uuid]
 }
 
-exports.updateAuthAccount = function(uuid, mcAccessToken, msAccessToken, msRefreshToken){
+exports.updateAuthAccount = function (uuid, mcAccessToken, msAccessToken, msRefreshToken) {
     config.authenticationDatabase[uuid].accessToken = mcAccessToken
     config.authenticationDatabase[uuid].microsoft.access_token = msAccessToken
     config.authenticationDatabase[uuid].microsoft.refresh_token = msRefreshToken
@@ -361,7 +378,7 @@ exports.addAuthAccount = function (uuid, accessToken, username, displayName, exp
     return config.authenticationDatabase[uuid]
 }
 
-exports.addMsAuthAccount = function(data){
+exports.addMsAuthAccount = function (data) {
     config.selectedAccount = data.profile.id
     config.authenticationDatabase[data.profile.id] = {
         accessToken: data.mcAccessToken,
@@ -372,7 +389,7 @@ exports.addMsAuthAccount = function(data){
             access_token: data.microsoft.access_token,
             refresh_token: data.microsoft.refresh_token
         }
-        
+
     }
 
     return config.authenticationDatabase[data.profile.id]
@@ -691,27 +708,6 @@ exports.getLaunchDetached = function (def = false) {
  */
 exports.setLaunchDetached = function (launchDetached) {
     config.settings.game.launchDetached = launchDetached
-}
-
-// Launcher Settings
-
-/**
- * Check if the launcher should download prerelease versions.
- * 
- * @param {boolean} def Optional. If true, the default value will be returned.
- * @returns {boolean} Whether or not the launcher should download prerelease versions.
- */
-exports.getAllowPrerelease = function (def = false) {
-    return !def ? config.settings.launcher.allowPrerelease : DEFAULT_CONFIG.settings.launcher.allowPrerelease
-}
-
-/**
- * Change the status of Whether or not the launcher should download prerelease versions.
- * 
- * @param {boolean} launchDetached Whether or not the launcher should download prerelease versions.
- */
-exports.setAllowPrerelease = function (allowPrerelease) {
-    config.settings.launcher.allowPrerelease = allowPrerelease
 }
 
 exports.setMicrosoftAuth = microsoftAuth => {

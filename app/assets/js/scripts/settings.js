@@ -144,7 +144,8 @@ function initSettingsValues() {
                     } else if (cVal === 'JVMOptions') {
                         v.value = gFn().join(' ')
                     } else {
-                        v.value = gFn()
+                        if (cVal !== 'AllowPrerelease')
+                            v.value = gFn()
                     }
                 } else if (v.type === 'checkbox') {
                     v.checked = gFn()
@@ -187,12 +188,6 @@ function saveSettingsValues() {
                         sFn(v.value.split(' '))
                     } else {
                         sFn(v.value)
-                    }
-                } else if (v.type === 'checkbox') {
-                    sFn(v.checked)
-                    // Special Conditions
-                    if (cVal === 'AllowPrerelease') {
-                        changeAllowPrerelease(v.checked)
                     }
                 }
             } else if (v.tagName === 'DIV') {
@@ -1219,11 +1214,11 @@ function isPrerelease(version) {
 function populateVersionInformation(version, valueElement, titleElement, checkElement) {
     valueElement.innerHTML = version
     if (isPrerelease(version)) {
-        titleElement.innerHTML = 'PreRelease'
+        titleElement.innerHTML = 'DevBuild'
         titleElement.style.color = '#ff886d'
         checkElement.style.background = '#ff886d'
     } else {
-        titleElement.innerHTML = 'Stable Release'
+        titleElement.innerHTML = 'Release'
         titleElement.style.color = null
         checkElement.style.background = null
     }
@@ -1310,7 +1305,7 @@ function settingsUpdateButtonStatus(text, disabled = false, handler = null) {
  */
 function populateSettingsUpdateInformation(data) {
     if (data != null) {
-        settingsUpdateTitle.innerHTML = `New ${isPrerelease(data.version) ? 'Pre-Release' : 'Release'} verf&uuml;gbar`
+        settingsUpdateTitle.innerHTML = `${isPrerelease(data.version) ? 'Neues DevBuild' : 'Neue Release'} verf&uuml;gbar`
         settingsUpdateChangelogCont.style.display = null
         settingsUpdateChangelogTitle.innerHTML = data.releaseName
         settingsUpdateChangelogText.innerHTML = data.releaseNotes
@@ -1362,6 +1357,7 @@ function prepareSettings(first = false) {
     } else {
         prepareModsTab()
     }
+    document.getElementById('AllowPrerelease').checked = ConfigManager.isInTestMode()
     initSettingsValues()
     prepareAccountsTab()
     prepareJavaTab()

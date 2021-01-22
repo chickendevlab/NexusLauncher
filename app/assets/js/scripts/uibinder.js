@@ -61,7 +61,7 @@ function showMainUI(data){
 
     if(!isDev){
         loggerAutoUpdater.log('Initializing..')
-        ipcRenderer.send('autoUpdateAction', 'initAutoUpdater', ConfigManager.getAllowPrerelease())
+        ipcRenderer.send('autoUpdateAction', 'initAutoUpdater', ConfigManager.isInTestingMode())
     }
 
     prepareSettings(true)
@@ -76,7 +76,7 @@ function showMainUI(data){
 
         // If this is enabled in a development environment we'll get ratelimited.
         // The relaunch frequency is usually far too high.
-        if(!isDev && isLoggedIn){
+        if(!isDev &&  isLoggedIn){
             validateSelectedAccount()
         }
 
@@ -326,7 +326,7 @@ async function validateSelectedAccount(){
             const accLen = Object.keys(ConfigManager.getAuthAccounts()).length
             setOverlayContent(
                 'Erneutes Einloggen fehlgeschlagen',
-                `Der erneute Verifizieren von <strong>${selectedAcc.displayName}</strong> ist fehlgegeschlagen. Bitte ${accLen > 0 ? 'w&auml;hle einen anderen Account oder ' : ''} melde dich erneut an.`,
+                `Der erneute Verifizieren als <strong>${selectedAcc.displayName}</strong> ist fehlgegeschlagen. Bitte ${accLen > 0 ? 'w&auml;hle einen anderen Account oder ' : ''} melde dich erneut an.`,
                 'Anmelden',
                 'Anderen Account w&auml;hlen'
             )

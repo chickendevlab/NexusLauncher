@@ -94,18 +94,6 @@ if(!isDev){
     })
 }
 
-/**
- * Send a notification to the main process changing the value of
- * allowPrerelease. If we are running a prerelease version, then
- * this will always be set to true, regardless of the current value
- * of val.
- * 
- * @param {boolean} val The new allow prerelease value.
- */
-function changeAllowPrerelease(val){
-    ipcRenderer.send('autoUpdateAction', 'allowPrereleaseChange', val)
-}
-
 function showUpdateUI(info){
     //TODO Make this message a bit more informative `${info.version}`
     document.getElementById('image_seal_container').setAttribute('update', true)

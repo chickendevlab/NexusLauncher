@@ -13,7 +13,7 @@ const ConfigManager = require('./configmanager')
 const LoggerUtil = require('./loggerutil')
 const Mojang = require('./mojang')
 const Microsoft = require('./microsoft')
-const { reject } = require('async')
+//const { reject } = require('async')
 const logger = LoggerUtil('%c[AuthManager]', 'color: #a02d2a; font-weight: bold')
 const loggerSuccess = LoggerUtil('%c[AuthManager]', 'color: #209b07; font-weight: bold')
 
@@ -101,18 +101,6 @@ exports.addAccount = async function (username, password) {
     }
 }
 
-exports.addMicrosoftAccount = async function (tokens) {
-    try {
-        const profile = await microsoft.tryToLogin(tokens)
-        const ret = ConfigManager.addMsAuthAccount(profile)
-        ConfigManager.save()
-        return ret
-    } catch (e) {
-        return Promise.reject(e)
-    }
-
-}
-
 /**
  * Remove an account. This will invalidate the access token associated
  * with the account and then remove it from the database.
@@ -156,7 +144,7 @@ exports.validateSelected = async function () {
         } catch (error) {
             return Promise.reject(error)
         }
-    }
+    } else return true
 }
 
 exports.addMSAccount = async authCode => {
